@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBranchesTable extends Migration
+class CreateTodosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateBranchesTable extends Migration
      */
     public function up()
     {
-        Schema::create('branches', function (Blueprint $table) {
+        Schema::create('todos', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('branch_type')->nullable();
+            $table->string('title')->nullable();
+            $table->string('color')->nullable();
+            $table->tinyInteger('status')->default('0');
             $table->integer('created_by')->default('0');
             $table->timestamps();
         });
@@ -29,6 +30,6 @@ class CreateBranchesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('branches');
+        Schema::dropIfExists('todos');
     }
 }

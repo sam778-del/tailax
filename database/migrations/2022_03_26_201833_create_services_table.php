@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 class CreateServicesTable extends Migration
 {
@@ -20,6 +21,7 @@ class CreateServicesTable extends Migration
             $table->string('code')->unique()->nullable();
             $table->string('name', 100)->nullable();
             $table->float('amount')->nullable()->default(0.00);
+            $table->string('image')->nullable();
             $table->longText('description')->nullable();
             $table->boolean('status')->nullable()->default(false);
             $table->timestamps();

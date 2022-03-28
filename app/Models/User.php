@@ -12,7 +12,7 @@ class User extends Authenticatable
 {
     const ENABLE = TRUE;
     const DISABLED = FALSE;
-    const SUPERADMIM = 1;
+    const SUPERADMIN = 1;
 
     use HasApiTokens, HasFactory, Notifiable;
 
