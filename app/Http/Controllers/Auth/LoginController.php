@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Validation\Rule;
 
 class LoginController extends Controller
 {
@@ -47,7 +48,7 @@ class LoginController extends Controller
     public function showLogin($lang = '')
     {
         if ($lang == '') {
-            $lang = env('DEFAULT_LANG') ?? 'en';
+            $lang = env('TAILAX_LANG') ?? 'en';
         }
         \App::setLocale($lang);
         return view('auth.login', compact('lang'));
@@ -55,8 +56,18 @@ class LoginController extends Controller
 
     public function authLogin(LoginRequest $request)
     {
-        $validation['g-recaptcha-response'] = 'required|captcha';
+        if(env('GOOGLE_CAPTCHA') === 'yes'){
+            $validation['g-recaptcha-response'] = 'required|captcha';
+        }
         $this->validate($request, $validation);
         $request->authenticate();
+
+        $email    = $request->has('email') ? $request->email : '';
+        $password    = $request->has('password') ? $request->password : '';
+        if(Auth::attempt([ 'email' => $email, 'password' => $password, 'is_active' => 1, 'user_status' => 1 ])){
+
+        }else{
+            return redirect()->back()->with('error', __('Credentials Doesn\'t Match !'));
+        }
     }
 }
