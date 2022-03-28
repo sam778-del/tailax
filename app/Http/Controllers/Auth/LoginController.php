@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -35,6 +36,27 @@ class LoginController extends Controller
      */
     public function __construct()
     {
+        // if(!file_exists(storage_path() . "/installed"))
+        // {
+        //     header('location:install');
+        //     die;
+        // }
         $this->middleware('guest')->except('logout');
+    }
+
+    public function showLogin($lang = '')
+    {
+        if ($lang == '') {
+            $lang = env('DEFAULT_LANG') ?? 'en';
+        }
+        \App::setLocale($lang);
+        return view('auth.login', compact('lang'));
+    }
+
+    public function authLogin(LoginRequest $request)
+    {
+        $validation['g-recaptcha-response'] = 'required|captcha';
+        $this->validate($request, $validation);
+        $request->authenticate();
     }
 }
