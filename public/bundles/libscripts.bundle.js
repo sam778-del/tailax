@@ -18822,6 +18822,7 @@ if (typeof jQuery === "undefined") {
 // LUNO version update dynamic
 window.addEventListener("load", () => {
     var first = document.getElementById("Changelog");
+    first.outerHTML = '<span class="badge bg-primary ms-auto">v1.0.9</span>';
 });
 
 // general js project js
