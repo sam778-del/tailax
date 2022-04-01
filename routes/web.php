@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\CurrencyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,18 @@ Route::resource('branches', BranchController::class)->middleware(['auth']);
 Route::get("/get-branches", [BranchController::class, "datatables"])
         ->middleware('auth')
         ->name("branches.datatables");
+
+// Service Area
+Route::resource('services', ServiceController::class)->middleware(["auth"]);
+Route::get("/get-services", [ServiceController::class, "datatables"])
+        ->middleware('auth')
+        ->name('services.datatables');
+
+// Currency Area
+Route::resource('currencies', CurrencyController::class)->middleware('auth');
+Route::get('/get-currencies', [CurrencyController::class, "datatables"])
+        ->middleware('auth')
+        ->name('currencies.datatables');
+Route::patch('/currency-status/{currency_id}', [CurrencyController::class, 'changeCurrencyStatus'])
+        ->middleware('auth')
+        ->name('currencies.default');

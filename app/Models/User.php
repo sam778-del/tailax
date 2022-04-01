@@ -58,6 +58,11 @@ class User extends Authenticatable
         return ($this->parent_id == '0' || $this->parent_id == '1') ? $this->id : $this->parent_id;
     }
 
+    public function getUserDefaultCurrency()
+    {
+
+    }
+
     public function isAdmin()
     {
         return $this->parent_id == 0 && $this->is_active == 1 && $this->user_status == 1;
