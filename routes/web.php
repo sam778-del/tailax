@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BranchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,14 +18,13 @@ use Illuminate\Support\Facades\Route;
 
 require __DIR__ . '/auth.php';
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["auth"]);
 
-Route::get('/dashboard', function() {
-    return view('dashboard/sa_home');
-});
+// Service Area
+Route::resource('services', ServiceController::class)->middleware(["auth"]);
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Branch Area
+Route::resource('branches', BranchController::class)->middleware(['auth']);
+Route::get("/get-branches", [BranchController::class, "datatables"])
+        ->middleware('auth')
+        ->name("branches.datatables");

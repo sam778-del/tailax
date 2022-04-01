@@ -582,6 +582,12 @@ class UserTableSeeder extends Seeder
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ),
+            array(
+                'name' => 'Manage Activity Log',
+                'guard_name' => 'web',
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s'),
+            ),
         );
 
         Permission::insert($allPermissions);
@@ -679,6 +685,15 @@ class UserTableSeeder extends Seeder
             ['name' => 'Create Notification'],
             ['name' => 'Edit Notification'],
             ['name' => 'Delete Notification'],
+            ['name' => 'Manage Activity Log'],
+            ['name' => 'Manage Todo'],
+            ['name' => 'Create Todo'],
+            ['name' => 'Edit Todo'],
+            ['name' => 'Delete Todo'],
+            ['name' => 'Manage Calendar'],
+            ['name' => 'Create Calendar'],
+            ['name' => 'Edit Calendar'],
+            ['name' => 'Delete Calendar'],
         );
 
         $shop_owner_role             = new Role();

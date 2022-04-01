@@ -21,8 +21,8 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index($lang = '')
     {
-        return view('home');
+        return view('dashboard.sa_home');
     }
 }

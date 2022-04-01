@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use App\Http\Requests\Auth\LoginRequest;
+use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -42,10 +44,10 @@ class LoginController extends Controller
         //     header('location:install');
         //     die;
         // }
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('guest')->except('logout');
     }
 
-    public function showLogin($lang = '')
+    public function __invoke($lang = '')
     {
         if ($lang == '') {
             $lang = env('TAILAX_LANG') ?? 'en';
@@ -58,6 +60,8 @@ class LoginController extends Controller
     {
         if(env('GOOGLE_CAPTCHA') === 'yes'){
             $validation['g-recaptcha-response'] = 'required|captcha';
+        }else{
+            $validation = [];
         }
         $this->validate($request, $validation);
         $request->authenticate();
@@ -65,9 +69,17 @@ class LoginController extends Controller
         $email    = $request->has('email') ? $request->email : '';
         $password    = $request->has('password') ? $request->password : '';
         if(Auth::attempt([ 'email' => $email, 'password' => $password, 'is_active' => 1, 'user_status' => 1 ])){
-
+            return redirect()->intended('/');
         }else{
             return redirect()->back()->with('error', __('Credentials Doesn\'t Match !'));
         }
+    }
+
+    public function authLogout(Request $request)
+    {
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }

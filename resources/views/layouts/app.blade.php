@@ -4,10 +4,15 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="csrf-token" content="{{ csrf_token() }}">
-      <meta name="keyword" content="LUNO, Bootstrap 5, ReactJs, Angular, Laravel, VueJs, ASP .Net, Admin Dashboard, Admin Theme, HRMS, Projects">
-      <title>{{ config('app.name', 'Laravel') }}</title>
+      <title>
+        @if(trim($__env->yieldContent('page-title')))
+            @yield('page-title') -
+        @endif
+        {{ config('app.name', 'Tailax') }}
+      </title>
       <link rel="icon" href="favicon.ico" type="image/x-icon">
       <link rel="stylesheet" href="{{ asset('/css/luno.style.min.css') }}">
+      <link rel="stylesheet" href="{{ asset('/css/dataTables.min.css') }}">
       @stack('stylesheets')
    </head>
    <body class="layout-1" data-luno="theme-blue">
@@ -21,21 +26,30 @@
          <div class="page-toolbar px-xl-4 px-sm-2 px-0 py-3">
             <div class="container-fluid">
                 @yield('page-toolbar')
+                <div class="row">
+                    @yield('page-content')
+                </div>
             </div>
          </div>
          <!-- start: page body -->
-         <div class="page-body px-xl-4 px-sm-2 px-0 py-lg-2 py-1 mt-3">
-             @yield('page-content')
-             @include('layouts.modal-setting')
-         </div>
          <!-- start: page footer -->
          @include('layouts.footer')
       </div>
       <!-- Jquery Core Js -->
-      <script src="{{ asset('bundles/libscripts.bundle.js') }}"></script>
-      <script src="{{ asset('bundles/apexcharts.bundle.js') }}"></script>
-      <script src="{{ asset('bundles/daterangepicker.bundle.js') }}"></script>
-      <script src="{{ asset('bundles/dataTables.bundle.js') }}"></script>
+      <script src="{{ asset('/bundles/libscripts.bundle.js') }}"></script>
+      <script src="{{ asset('/bundles/dataTables.bundle.js') }}"></script>
+      <script src="{{ asset("/bundles/sweetalert2.bundle.js") }}"></script>
+      <script src="{{ asset('/bundles/toastr.min.js') }}"></script>
       @stack('scripts')
+      @if(Session::has('success'))
+      <script>
+          toastr.success("{{__('Success') }}", "{!! session('success') !!}", 'success');
+      </script>
+    @endif
+    @if(Session::has('error'))
+      <script>
+          toastr.error("{{__('Error') }}", "{!! session('error') !!}", 'error');
+      </script>
+    @endif
    </body>
 </html>

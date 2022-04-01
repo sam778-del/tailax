@@ -10,262 +10,283 @@
          </svg>
        </div>
        <!-- sidebar: Create new -->
-       <div class="create-new py-3 mb-2">
-          <div class="d-flex">
-             <select class="form-select rounded-pill me-1">
-                <option selected>Select Project</option>
-                <option value="1">Luno University</option>
-                <option value="2">Book Manager</option>
-                <option value="3">Luno Sass App</option>
-             </select>
-             <button class="btn bg-primary text-white rounded-circle" data-bs-toggle="modal" data-bs-target="#CreateNew" type="button"><i class="fa fa-plus"></i></button>
-          </div>
-       </div>
+
        <!-- sidebar: menu list -->
        <div class="main-menu flex-grow-1">
           <ul class="menu-list">
-             <li class="divider py-2 lh-sm"><span class="small">MAIN</span><br> <small class="text-muted">Unique dashboard designs </small></li>
              <li>
-                <a class="m-link active" href="index.html">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-                      <path class="fill-secondary" fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
-                   </svg>
-                   <span class="ms-2">My Dashboard</span>
+                <a class="m-link {{ Request::segment(1) == "" ? 'active' : '' }}" href="{{ url('/') }}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                        <path class="fill-secondary" d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
+                        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
+                    </svg>
+                   <span class="ms-2">{{ __('Dashboard') }}</span>
                 </a>
              </li>
-             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Dashboard" href="#">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path class="fill-secondary" d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z"/>
-                      <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"/>
-                   </svg>
-                   <span class="ms-2">Unique Dashboard</span>
-                   <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-                </a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse" id="menu-Dashboard">
-                   <li><a class="ms-link" href="crm/index.html" target="_blank">CRM Management</a></li>
-                   <li><a class="ms-link" href="crypto/index.html" target="_blank">Cryptocurrency</a></li>
-                   <li><a class="ms-link" href="ecommerce/index.html" target="_blank">eCommerce</a></li>
-                   <li><a class="ms-link" href="event/index.html" target="_blank">Event Management</a></li>
-                   <li><a class="ms-link" href="fitness/index.html" target="_blank">Fitness Analytics</a></li>
-                   <li><a class="ms-link" href="hospital/index.html" target="_blank">Hospital Management</a></li>
-                   <li><a class="ms-link" href="hrms/index.html" target="_blank">HRMS Portal</a></li>
-                   <li><a class="ms-link" href="dashboard-inventory.html">Inventory Management</a></li>
-                   <li><a class="ms-link" href="dashboard-job.html">job Portal</a></li>
-                   <li><a class="ms-link" href="dashboard-realestate.html">Real-Estate</a></li>
-                   <li><a class="ms-link" href="dashboard-restaurant.html">Restaurant</a></li>
-                   <li><a class="ms-link" href="dashboard-server.html">Server Analysis</a></li>
-                   <li><a class="ms-link" href="dashboard-university.html">School / University</a></li>
-                </ul>
-             </li>
-             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Applications" href="#">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"/>
-                      <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                   </svg>
-                   <span class="ms-2">Applications</span>
-                   <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-                </a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse" id="menu-Applications">
-                   <li><a class="ms-link" href="app-calendar.html">Calendar</a></li>
-                   <li><a class="ms-link" href="app-calendar-tui.html">tui Calendar</a></li>
-                   <li><a class="ms-link" href="app-email.html">Email App</a></li>
-                   <li><a class="ms-link" href="app-chat.html">Chat app</a></li>
-                   <li><a class="ms-link" href="app-campaigns.html">Campaigns</a></li>
-                   <li><a class="ms-link" href="app-social.html">Social App</a></li>
-                   <li><a class="ms-link" href="app-file-manager.html">File Manager</a></li>
-                   <li><a class="ms-link" href="app-todo.html">Todo App</a></li>
-                   <li><a class="ms-link" href="app-contacts.html">Contacts</a></li>
-                   <li><a class="ms-link" href="app-tasks.html">Tasks</a></li>
-                   <li><a class="ms-link" href="app-project.html">Project List</a></li>
-                   <li><a class="ms-link" href="app-jkanban.html">Kanban Board</a></li>
-                   <li><a class="ms-link" href="app-blog.html">Blog</a></li>
-                </ul>
-             </li>
-             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Pages" href="#">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path class="fill-secondary" fill-rule="evenodd" d="M8.646 5.646a.5.5 0 0 1 .708 0l2 2a.5.5 0 0 1 0 .708l-2 2a.5.5 0 0 1-.708-.708L10.293 8 8.646 6.354a.5.5 0 0 1 0-.708zm-1.292 0a.5.5 0 0 0-.708 0l-2 2a.5.5 0 0 0 0 .708l2 2a.5.5 0 0 0 .708-.708L5.707 8l1.647-1.646a.5.5 0 0 0 0-.708z"/>
-                      <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                      <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                   </svg>
-                   <span class="ms-2">Crafted Pages</span>
-                   <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-                </a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse" id="menu-Pages">
-                   <li><a class="ms-link" href="page-profile.html">My Profile</a></li>
-                   <li><a class="ms-link" href="page-bookmark.html">Bookmarks</a></li>
-                   <li><a class="ms-link" href="page-timeline.html">Timeline</a></li>
-                   <li><a class="ms-link" href="page-imagegallery.html">Image Gallery</a></li>
-                   <li><a class="ms-link" href="page-pricing.html">Pricing</a></li>
-                   <li><a class="ms-link" href="page-teamsboard.html">Teams Board</a></li>
-                   <li><a class="ms-link" href="page-support-ticket.html">Support Ticket</a></li>
-                   <li><a class="ms-link" href="page-faqs.html">FAQs</a></li>
-                   <li><a class="ms-link" href="page-search.html">Search Pages</a></li>
-                   <li><a class="ms-link" href="page-footers.html">Footers</a></li>
-                </ul>
-             </li>
-             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Account" href="#">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M2 1C1.46957 1 0.960859 1.21071 0.585786 1.58579C0.210714 1.96086 0 2.46957 0 3L0 13C0 13.5304 0.210714 14.0391 0.585786 14.4142C0.960859 14.7893 1.46957 15 2 15H14C14.5304 15 15.0391 14.7893 15.4142 14.4142C15.7893 14.0391 16 13.5304 16 13V3C16 2.46957 15.7893 1.96086 15.4142 1.58579C15.0391 1.21071 14.5304 1 14 1H2ZM1 3C1 2.73478 1.10536 2.48043 1.29289 2.29289C1.48043 2.10536 1.73478 2 2 2H14C14.2652 2 14.5196 2.10536 14.7071 2.29289C14.8946 2.48043 15 2.73478 15 3V13C15 13.2652 14.8946 13.5196 14.7071 13.7071C14.5196 13.8946 14.2652 14 14 14H2C1.73478 14 1.48043 13.8946 1.29289 13.7071C1.10536 13.5196 1 13.2652 1 13V3ZM2 5.5C2 5.36739 2.05268 5.24021 2.14645 5.14645C2.24021 5.05268 2.36739 5 2.5 5H6C6.13261 5 6.25979 5.05268 6.35355 5.14645C6.44732 5.24021 6.5 5.36739 6.5 5.5C6.5 5.63261 6.44732 5.75979 6.35355 5.85355C6.25979 5.94732 6.13261 6 6 6H2.5C2.36739 6 2.24021 5.94732 2.14645 5.85355C2.05268 5.75979 2 5.63261 2 5.5ZM2 8.5C2 8.36739 2.05268 8.24021 2.14645 8.14645C2.24021 8.05268 2.36739 8 2.5 8H6C6.13261 8 6.25979 8.05268 6.35355 8.14645C6.44732 8.24021 6.5 8.36739 6.5 8.5C6.5 8.63261 6.44732 8.75979 6.35355 8.85355C6.25979 8.94732 6.13261 9 6 9H2.5C2.36739 9 2.24021 8.94732 2.14645 8.85355C2.05268 8.75979 2 8.63261 2 8.5ZM2 10.5C2 10.3674 2.05268 10.2402 2.14645 10.1464C2.24021 10.0527 2.36739 10 2.5 10H6C6.13261 10 6.25979 10.0527 6.35355 10.1464C6.44732 10.2402 6.5 10.3674 6.5 10.5C6.5 10.6326 6.44732 10.7598 6.35355 10.8536C6.25979 10.9473 6.13261 11 6 11H2.5C2.36739 11 2.24021 10.9473 2.14645 10.8536C2.05268 10.7598 2 10.6326 2 10.5Z"/>
-                      <path class="fill-secondary" d="M8.5 11C8.5 11 8 11 8 10.5C8 10 8.5 8.5 11 8.5C13.5 8.5 14 10 14 10.5C14 11 13.5 11 13.5 11H8.5ZM11 8C11.3978 8 11.7794 7.84196 12.0607 7.56066C12.342 7.27936 12.5 6.89782 12.5 6.5C12.5 6.10218 12.342 5.72064 12.0607 5.43934C11.7794 5.15804 11.3978 5 11 5C10.6022 5 10.2206 5.15804 9.93934 5.43934C9.65804 5.72064 9.5 6.10218 9.5 6.5C9.5 6.89782 9.65804 7.27936 9.93934 7.56066C10.2206 7.84196 10.6022 8 11 8V8Z"/>
-                   </svg>
-                   <span class="ms-2">Account</span>
-                   <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-                </a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse" id="menu-Account">
-                   <li><a class="ms-link" href="account-settings.html">Settings</a></li>
-                   <li><a class="ms-link" href="account-invoices.html">Invoice List</a></li>
-                   <li><a class="ms-link" href="account-create-invoices.html">Create Invoices</a></li>
-                   <li><a class="ms-link" href="account-billing.html">Billing</a></li>
-                </ul>
-             </li>
-             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-Authentication" href="#">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M5.33801 1.59C4.38559 1.85248 3.43965 2.1379 2.50101 2.446C2.41529 2.47376 2.3391 2.52504 2.28111 2.59399C2.22312 2.66295 2.18567 2.7468 2.17301 2.836C1.61901 6.993 2.89901 10.026 4.42601 12.024C5.07252 12.8784 5.84341 13.6311 6.71301 14.257C7.05901 14.501 7.36501 14.677 7.60601 14.79C7.72601 14.847 7.82401 14.885 7.89901 14.908C7.93181 14.9195 7.96562 14.9279 8.00001 14.933C8.03398 14.9275 8.06743 14.9191 8.10001 14.908C8.17601 14.885 8.27401 14.847 8.39401 14.79C8.63401 14.677 8.94101 14.5 9.28701 14.257C10.1566 13.6311 10.9275 12.8784 11.574 12.024C13.101 10.027 14.381 6.993 13.827 2.836C13.8145 2.74676 13.777 2.66285 13.719 2.59388C13.661 2.52491 13.5848 2.47366 13.499 2.446C12.848 2.233 11.749 1.886 10.662 1.591C9.55201 1.29 8.53101 1.067 8.00001 1.067C7.47001 1.067 6.44801 1.289 5.33801 1.59ZM5.07201 0.56C6.15701 0.265 7.31001 0 8.00001 0C8.69001 0 9.84301 0.265 10.928 0.56C12.038 0.86 13.157 1.215 13.815 1.43C14.0901 1.52085 14.334 1.68747 14.5187 1.9107C14.7034 2.13394 14.8213 2.40474 14.859 2.692C15.455 7.169 14.072 10.487 12.394 12.682C11.6824 13.621 10.834 14.4479 9.87701 15.135C9.5461 15.3728 9.19549 15.5819 8.82901 15.76C8.54901 15.892 8.24801 16 8.00001 16C7.75201 16 7.45201 15.892 7.17101 15.76C6.80452 15.5819 6.45391 15.3728 6.12301 15.135C5.16603 14.4478 4.31759 13.621 3.60601 12.682C1.92801 10.487 0.545005 7.169 1.14101 2.692C1.17869 2.40474 1.29665 2.13394 1.48132 1.9107C1.666 1.68747 1.9099 1.52085 2.18501 1.43C3.1402 1.11681 4.10281 0.826725 5.07201 0.56Z"/>
-                      <path class="fill-secondary" d="M8 5.38462C8.21217 5.38462 8.41566 5.46566 8.56569 5.60992C8.71571 5.75418 8.8 5.94983 8.8 6.15385V6.53846H7.2V6.15385C7.2 5.94983 7.28429 5.75418 7.43431 5.60992C7.58434 5.46566 7.78783 5.38462 8 5.38462ZM9.2 6.53846V6.15385C9.2 5.84783 9.07357 5.55434 8.84853 5.33795C8.62348 5.12157 8.31826 5 8 5C7.68174 5 7.37652 5.12157 7.15147 5.33795C6.92643 5.55434 6.8 5.84783 6.8 6.15385V6.53846C6.58783 6.53846 6.38434 6.61951 6.23431 6.76376C6.08429 6.90802 6 7.10368 6 7.30769V9.23077C6 9.43478 6.08429 9.63044 6.23431 9.7747C6.38434 9.91896 6.58783 10 6.8 10H9.2C9.41217 10 9.61566 9.91896 9.76569 9.7747C9.91571 9.63044 10 9.43478 10 9.23077V7.30769C10 7.10368 9.91571 6.90802 9.76569 6.76376C9.61566 6.61951 9.41217 6.53846 9.2 6.53846Z"/>
-                   </svg>
-                   <span class="ms-2">Authentication</span>
-                   <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-                </a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse" id="menu-Authentication">
-                   <li><a class="ms-link" href="auth-404.html">404</a></li>
-                   <li><a class="ms-link" href="auth-403.html">403</a></li>
-                   <li><a class="ms-link" href="auth-500.html">500</a></li>
-                   <li><a class="ms-link" href="auth-signin.html">Sign in</a></li>
-                   <li><a class="ms-link" href="auth-signup.html">Sign up</a></li>
-                   <li><a class="ms-link" href="auth-password-reset.html">Password reset</a></li>
-                   <li><a class="ms-link" href="auth-two-step.html">2-Step Authentication</a></li>
-                   <li><a class="ms-link" href="auth-lockscreen.html">Lockscreen</a></li>
-                   <li><a class="ms-link" href="auth-maintenance.html">Maintenance</a></li>
-                </ul>
-             </li>
-             <li class="collapsed">
-                <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-level0" href="#">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path fill-rule="evenodd" clip-rule="evenodd" d="M6 3.5C6 3.10218 6.15804 2.72064 6.43934 2.43934C6.72064 2.15804 7.10218 2 7.5 2H8.5C8.89782 2 9.27936 2.15804 9.56066 2.43934C9.84196 2.72064 10 3.10218 10 3.5V4.5C10 4.89782 9.84196 5.27936 9.56066 5.56066C9.27936 5.84196 8.89782 6 8.5 6V7H14C14.1326 7 14.2598 7.05268 14.3536 7.14645C14.4473 7.24021 14.5 7.36739 14.5 7.5V8.5C14.5 8.63261 14.4473 8.75979 14.3536 8.85355C14.2598 8.94732 14.1326 9 14 9C13.8674 9 13.7402 8.94732 13.6464 8.85355C13.5527 8.75979 13.5 8.63261 13.5 8.5V8H8.5V8.5C8.5 8.63261 8.44732 8.75979 8.35355 8.85355C8.25979 8.94732 8.13261 9 8 9C7.86739 9 7.74021 8.94732 7.64645 8.85355C7.55268 8.75979 7.5 8.63261 7.5 8.5V8H2.5V8.5C2.5 8.63261 2.44732 8.75979 2.35355 8.85355C2.25979 8.94732 2.13261 9 2 9C1.86739 9 1.74021 8.94732 1.64645 8.85355C1.55268 8.75979 1.5 8.63261 1.5 8.5V7.5C1.5 7.36739 1.55268 7.24021 1.64645 7.14645C1.74021 7.05268 1.86739 7 2 7H7.5V6C7.10218 6 6.72064 5.84196 6.43934 5.56066C6.15804 5.27936 6 4.89782 6 4.5V3.5Z"/>
-                      <path class="fill-secondary" d="M0.43934 10.4393C0.158035 10.7206 0 11.1022 0 11.5V12.5C0 12.8978 0.158035 13.2794 0.43934 13.5607C0.720644 13.842 1.10218 14 1.5 14H2.5C2.89782 14 3.27936 13.842 3.56066 13.5607C3.84196 13.2794 4 12.8978 4 12.5V11.5C4 11.1022 3.84196 10.7206 3.56066 10.4393C3.27936 10.158 2.89782 10 2.5 10H1.5C1.10218 10 0.720644 10.158 0.43934 10.4393Z"/>
-                      <path class="fill-secondary" d="M6.43934 10.4393C6.15804 10.7206 6 11.1022 6 11.5V12.5C6 12.8978 6.15804 13.2794 6.43934 13.5607C6.72064 13.842 7.10218 14 7.5 14H8.5C8.89782 14 9.27936 13.842 9.56066 13.5607C9.84196 13.2794 10 12.8978 10 12.5V11.5C10 11.1022 9.84196 10.7206 9.56066 10.4393C9.27936 10.158 8.89782 10 8.5 10H7.5C7.10218 10 6.72064 10.158 6.43934 10.4393Z"/>
-                      <path class="fill-secondary" d="M12.4393 10.4393C12.158 10.7206 12 11.1022 12 11.5V12.5C12 12.8978 12.158 13.2794 12.4393 13.5607C12.7206 13.842 13.1022 14 13.5 14H14.5C14.8978 14 15.2794 13.842 15.5607 13.5607C15.842 13.2794 16 12.8978 16 12.5V11.5C16 11.1022 15.842 10.7206 15.5607 10.4393C15.2794 10.158 14.8978 10 14.5 10H13.5C13.1022 10 12.7206 10.158 12.4393 10.4393Z"/>
-                   </svg>
-                   <span class="ms-2">Menu Level 0</span>
-                   <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-                </a>
-                <!-- Menu: Sub menu ul -->
-                <ul class="sub-menu collapse" id="menu-level0">
-                   <li class="collapsed">
-                      <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-level1" href="#"><span>Menu Level 1</span> <span class="arrow fa fa-angle-right ms-auto text-end"></span></a>
-                      <!-- Menu: Sub menu ul -->
-                      <ul class="sub-menu collapse" id="menu-level1">
-                         <li class="collapsed">
-                            <a class="m-link" data-bs-toggle="collapse" data-bs-target="#menu-level2" href="#"><span>Menu Level 2</span> <span class="arrow fa fa-angle-right ms-auto text-end"></span></a>
-                            <!-- Menu: Sub menu ul -->
-                            <ul class="sub-menu collapse" id="menu-level2">
-                               <li><a class="ms-link" href="#">Menu Level 3</a></li>
-                            </ul>
-                         </li>
-                         <li><a class="ms-link" href="#">Menu Level 2</a></li>
-                      </ul>
-                   </li>
-                   <li><a class="ms-link" href="#">Menu Level 1</a></li>
-                </ul>
-             </li>
-          </ul>
-          <ul class="menu-list">
-             <li class="divider py-2 lh-sm"><span class="small">RESOURCES</span><br> <small class="text-muted">you need to know about LUNO</small></li>
-             <li>
-                <a class="m-link" href="layouts.html">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M14 2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h12zM2 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2H2z"/>
-                      <path class="fill-secondary" d="M3 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                   </svg>
-                   <span class="ms-2">Layouts</span>
-                </a>
-             </li>
-             <li>
-                <a class="m-link" href="modals.html">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path class="fill-secondary" d="M2 3C2 3.13261 2.05268 3.25979 2.14645 3.35355C2.24021 3.44732 2.36739 3.5 2.5 3.5H13.5C13.6326 3.5 13.7598 3.44732 13.8536 3.35355C13.9473 3.25979 14 3.13261 14 3C14 2.86739 13.9473 2.74021 13.8536 2.64645C13.7598 2.55268 13.6326 2.5 13.5 2.5H2.5C2.36739 2.5 2.24021 2.55268 2.14645 2.64645C2.05268 2.74021 2 2.86739 2 3ZM4 1C4 1.13261 4.05268 1.25979 4.14645 1.35355C4.24021 1.44732 4.36739 1.5 4.5 1.5H11.5C11.6326 1.5 11.7598 1.44732 11.8536 1.35355C11.9473 1.25979 12 1.13261 12 1C12 0.867392 11.9473 0.740215 11.8536 0.646447C11.7598 0.552678 11.6326 0.5 11.5 0.5H4.5C4.36739 0.5 4.24021 0.552678 4.14645 0.646447C4.05268 0.740215 4 0.867392 4 1Z" />
-                      <path d="M13.991 7L14.015 7.001C14.2018 7.01372 14.3845 7.06227 14.553 7.144C14.6744 7.20048 14.7786 7.28812 14.855 7.398C14.922 7.498 15 7.675 15 8V13.991L14.999 14.015C14.9862 14.2018 14.9376 14.3845 14.856 14.553C14.7995 14.6743 14.7118 14.7785 14.602 14.855C14.502 14.922 14.325 15 14 15H2.009L1.985 14.999C1.79817 14.9862 1.61554 14.9376 1.447 14.856C1.32567 14.7995 1.22148 14.7118 1.145 14.602C1.078 14.502 1 14.325 1 14V8.009L1.001 7.985C1.01372 7.79815 1.06227 7.6155 1.144 7.447C1.20052 7.32567 1.28816 7.22148 1.398 7.145C1.498 7.078 1.675 7 2 7H13.991ZM14 6H2C0 6 0 8 0 8V14C0 16 2 16 2 16H14C16 16 16 14 16 14V8C16 6 14 6 14 6Z" />
-                   </svg>
-                   <span class="ms-2">Modals Popups</span>
-                </a>
-             </li>
-             <li>
-                <a class="m-link" href="https://www.wrraptheme.com/templates/luno/documentation/w-cards.html">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path d="M4 1.5H3C2.46957 1.5 1.96086 1.71071 1.58579 2.08579C1.21071 2.46086 1 2.96957 1 3.5V14C1 14.5304 1.21071 15.0391 1.58579 15.4142C1.96086 15.7893 2.46957 16 3 16H13C13.5304 16 14.0391 15.7893 14.4142 15.4142C14.7893 15.0391 15 14.5304 15 14V3.5C15 2.96957 14.7893 2.46086 14.4142 2.08579C14.0391 1.71071 13.5304 1.5 13 1.5H12V2.5H13C13.2652 2.5 13.5196 2.60536 13.7071 2.79289C13.8946 2.98043 14 3.23478 14 3.5V14C14 14.2652 13.8946 14.5196 13.7071 14.7071C13.5196 14.8946 13.2652 15 13 15H3C2.73478 15 2.48043 14.8946 2.29289 14.7071C2.10536 14.5196 2 14.2652 2 14V3.5C2 3.23478 2.10536 2.98043 2.29289 2.79289C2.48043 2.60536 2.73478 2.5 3 2.5H4V1.5Z"/>
-                      <path d="M9.5 1C9.63261 1 9.75979 1.05268 9.85355 1.14645C9.94732 1.24021 10 1.36739 10 1.5V2.5C10 2.63261 9.94732 2.75979 9.85355 2.85355C9.75979 2.94732 9.63261 3 9.5 3H6.5C6.36739 3 6.24021 2.94732 6.14645 2.85355C6.05268 2.75979 6 2.63261 6 2.5V1.5C6 1.36739 6.05268 1.24021 6.14645 1.14645C6.24021 1.05268 6.36739 1 6.5 1H9.5ZM6.5 0C6.10218 0 5.72064 0.158035 5.43934 0.43934C5.15804 0.720644 5 1.10218 5 1.5V2.5C5 2.89782 5.15804 3.27936 5.43934 3.56066C5.72064 3.84196 6.10218 4 6.5 4H9.5C9.89782 4 10.2794 3.84196 10.5607 3.56066C10.842 3.27936 11 2.89782 11 2.5V1.5C11 1.10218 10.842 0.720644 10.5607 0.43934C10.2794 0.158035 9.89782 0 9.5 0L6.5 0Z"/>
-                      <path class="fill-secondary" d="M5.556 7.8225C5.54589 7.71838 5.55767 7.6133 5.59058 7.51401C5.6235 7.41472 5.67682 7.32341 5.74712 7.24595C5.81742 7.16849 5.90315 7.10659 5.9988 7.06424C6.09444 7.02188 6.19789 7 6.3025 7H7.5C7.5663 7 7.62989 7.02634 7.67678 7.07322C7.72366 7.12011 7.75 7.1837 7.75 7.25V7.441C7.75 7.789 7.5015 8.032 7.314 8.1755C7.29143 8.19154 7.27195 8.21153 7.2565 8.2345C7.25399 8.2384 7.25198 8.2426 7.2505 8.247L7.25 8.25V8.2515L7.2515 8.2565C7.2535 8.2615 7.2585 8.2705 7.2695 8.283C7.30776 8.32381 7.35362 8.35676 7.4045 8.38C7.545 8.45 7.755 8.5 8 8.5C8.246 8.5 8.456 8.45 8.595 8.38C8.64606 8.35681 8.69209 8.32386 8.7305 8.283C8.73784 8.27497 8.74391 8.26587 8.7485 8.256L8.75 8.251V8.247C8.74853 8.2426 8.74651 8.2384 8.744 8.2345C8.72855 8.21153 8.70907 8.19154 8.6865 8.1755C8.499 8.032 8.2505 7.789 8.2505 7.441V7.25C8.2505 7.18378 8.27677 7.12027 8.32355 7.0734C8.37032 7.02653 8.43378 7.00013 8.5 7H9.6975C9.80211 7 9.90556 7.02188 10.0012 7.06424C10.0968 7.10659 10.1826 7.16849 10.2529 7.24595C10.3232 7.32341 10.3765 7.41472 10.4094 7.51401C10.4423 7.6133 10.4541 7.71838 10.444 7.8225L10.3225 9.25H10.441C10.5385 9.25 10.651 9.1765 10.7785 9.01C10.8835 8.873 11.0425 8.75 11.25 8.75C11.534 8.75 11.7235 8.9735 11.827 9.181C11.9385 9.4035 12 9.6935 12 10C12 10.3065 11.9385 10.5965 11.827 10.819C11.7235 11.0265 11.534 11.25 11.25 11.25C11.0425 11.25 10.8835 11.127 10.7785 10.99C10.651 10.8235 10.5385 10.75 10.441 10.75H10.3225L10.444 12.1775C10.4541 12.2816 10.4423 12.3867 10.4094 12.486C10.3765 12.5853 10.3232 12.6766 10.2529 12.7541C10.1826 12.8315 10.0968 12.8934 10.0012 12.9358C9.90556 12.9781 9.80211 13 9.6975 13H8.5C8.4337 13 8.37011 12.9737 8.32322 12.9268C8.27634 12.8799 8.25 12.8163 8.25 12.75V12.559C8.25 12.211 8.4985 11.968 8.686 11.8245C8.70857 11.8085 8.72805 11.7885 8.7435 11.7655C8.74601 11.7616 8.74802 11.7574 8.7495 11.753L8.75 11.75V11.7485L8.7485 11.7435C8.74386 11.7338 8.7378 11.7249 8.7305 11.717C8.69225 11.6762 8.64639 11.6432 8.5955 11.62C8.455 11.55 8.245 11.5 8 11.5C7.7545 11.5 7.544 11.55 7.405 11.62C7.35393 11.6432 7.3079 11.6761 7.2695 11.717C7.26216 11.725 7.25609 11.7341 7.2515 11.744L7.25 11.749V11.75L7.2505 11.753C7.25198 11.7574 7.25399 11.7616 7.2565 11.7655C7.2645 11.779 7.2815 11.7995 7.314 11.8245C7.5015 11.968 7.75 12.211 7.75 12.559V12.75C7.75 12.8163 7.72366 12.8799 7.67678 12.9268C7.62989 12.9737 7.5663 13 7.5 13H6.3025C6.19789 13 6.09444 12.9781 5.9988 12.9358C5.90315 12.8934 5.81742 12.8315 5.74712 12.7541C5.67682 12.6766 5.6235 12.5853 5.59058 12.486C5.55767 12.3867 5.54589 12.2816 5.556 12.1775L5.678 10.75H5.559C5.4615 10.75 5.349 10.8235 5.2215 10.99C5.1165 11.127 4.9575 11.25 4.75 11.25C4.466 11.25 4.2765 11.0265 4.173 10.819C4.0615 10.5965 4 10.3065 4 10C4 9.6935 4.0615 9.4035 4.173 9.181C4.2765 8.9735 4.466 8.75 4.75 8.75C4.9575 8.75 5.1165 8.873 5.2215 9.01C5.349 9.1765 5.4615 9.25 5.559 9.25H5.678L5.556 7.8225Z" />
-                   </svg>
-                   <span class="ms-2">Widget's</span>
-                </a>
-             </li>
-             <li>
-                <a class="m-link" href="https://www.wrraptheme.com/templates/luno/documentation/index.html">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path class="fill-secondary" d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                      <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z"/>
-                      <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z"/>
-                   </svg>
-                   <span class="ms-2">Documentation</span>
-                </a>
-             </li>
-             <li>
-                <a class="m-link" href="https://www.wrraptheme.com/templates/luno/documentation/doc-changelog.html">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                      <path class="fill-secondary" d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                      <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                   </svg>
-                   <span class="ms-2">Changelog</span>
-                   <span id="Changelog"></span>
-                </a>
-             </li>
+
+             @if(Gate::check('Manage Product') || Gate::check('Manage Category') || Gate::check('Manage Brand') || Gate::check('Manage Tax') || Gate::check('Manage Unit'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'products' || Request::segment(1) == 'categories' || Request::segment(1) == 'brands' || Request::segment(1) == 'taxes'|| Request::segment(1) == 'units') ? 'active' : ''}}" data-bs-toggle="collapse" data-bs-target="#menu-products" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M2.95 0.4C3.04315 0.275804 3.16393 0.175001 3.30279 0.105573C3.44164 0.0361451 3.59475 0 3.75 0L12.25 0C12.4052 0 12.5584 0.0361451 12.6972 0.105573C12.8361 0.175001 12.9569 0.275804 13.05 0.4L15.9 4.53333C15.9649 4.61988 16 4.72515 16 4.83333V15C16 15.2652 15.8946 15.5196 15.7071 15.7071C15.5196 15.8946 15.2652 16 15 16H1C0.734783 16 0.48043 15.8946 0.292893 15.7071C0.105357 15.5196 0 15.2652 0 15V4.83333C0 4.72515 0.0350889 4.61988 0.1 4.53333L2.95 0.4ZM7.5 1H3.75L1.5 4.33333H7.5V1ZM8.5 1V4.33333H14.5L12.25 1H8.5ZM15 5.33333H1V15H15V5.33333Z" fill="black"/>
+                            <rect x="6" y="7.11108" width="4.44444" height="6.22222" fill="black"/>
+                            <path class="fill-secondary" d="M6 7.11108H10.4444V13.3333H6V7.11108Z" fill="black"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Products') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'products' || Request::segment(1) == 'categories' || Request::segment(1) == 'brands' || Request::segment(1) == 'taxes'|| Request::segment(1) == 'units') ? 'show' : ''}}" id="menu-products">
+                        @can('Manage Product')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'products') ? 'active' : '' }}" href="auth-404.html">{{ __('Product') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Category')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'categories') ? 'active' : '' }}" href="auth-404.html">{{ __('Categories') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Tax')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'taxes') ? 'active' : '' }}" href="auth-404.html">{{ __('Tax') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Brand')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'brands') ? 'active' : '' }}" href="auth-404.html">{{ __('Brand') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Units')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'units') ? 'active' : '' }}" href="auth-404.html">{{ __('Units') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Service'))
+                <li>
+                    <a class="m-link {{ (Request::segment(1) == "services") ? 'active' : '' }}" href="{{ url('/') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"></path>
+                            <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
+                        </svg>
+                    <span class="ms-2">{{ __('Services') }}</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Measurement') || Gate::check('Manage Measurement Field'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-measurements" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12.7677C1 12.5962 1.06811 12.4318 1.18935 12.3106C1.31058 12.1893 1.47501 12.1212 1.64646 12.1212H14.5758C14.7472 12.1212 14.9116 12.1893 15.0329 12.3106C15.1541 12.4318 15.2222 12.5962 15.2222 12.7677C15.2222 12.9391 15.1541 13.1036 15.0329 13.2248C14.9116 13.346 14.7472 13.4141 14.5758 13.4141H1.64646C1.47501 13.4141 1.31058 13.346 1.18935 13.2248C1.06811 13.1036 1 12.9391 1 12.7677ZM1 2.42424C1 2.25278 1.06811 2.08835 1.18935 1.96712C1.31058 1.84588 1.47501 1.77777 1.64646 1.77777H14.5758C14.7472 1.77777 14.9116 1.84588 15.0329 1.96712C15.1541 2.08835 15.2222 2.25278 15.2222 2.42424C15.2222 2.59569 15.1541 2.76012 15.0329 2.88136C14.9116 3.00259 14.7472 3.0707 14.5758 3.0707H1.64646C1.47501 3.0707 1.31058 3.00259 1.18935 2.88136C1.06811 2.76012 1 2.59569 1 2.42424Z" fill="black"/>
+                            <path class="fill-secondary" d="M1.18935 6.99517C1.06811 7.11641 1 7.28084 1 7.45229C1 7.62375 1.06811 7.78818 1.18935 7.90941C1.31058 8.03065 1.47501 8.09876 1.64646 8.09876H14.5758C14.7472 8.09876 14.9116 8.03065 15.0329 7.90941C15.1541 7.78818 15.2222 7.62375 15.2222 7.45229C15.2222 7.28084 15.1541 7.11641 15.0329 6.99517C14.9116 6.87394 14.7472 6.80583 14.5758 6.80583H1.64646C1.47501 6.80583 1.31058 6.87394 1.18935 6.99517Z" fill="black"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Measurements') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'show' : '' }}" id="menu-measurements">
+                        @can('Manage Measurement')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'measurements') ? 'active' : '' }}" href="auth-404.html">{{ __('Measurements') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Measurement Field')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'measurements_field') ? 'active' : '' }}" href="auth-404.html">{{ __('Measurement Field') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Customer'))
+                <li>
+                    <a class="m-link {{ (Request::segment(1) == "customers") ? 'active' : '' }}" href="{{ url('/') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M12 15.1111L13 15.1111C13.5304 15.1111 14.0391 14.9004 14.4142 14.5253C14.7893 14.1502 15 13.6415 15 13.1111L15 2.61108C15 2.08065 14.7893 1.57194 14.4142 1.19687C14.0391 0.821798 13.5304 0.611084 13 0.611084L3 0.611085C2.46957 0.611085 1.96086 0.821799 1.58579 1.19687C1.21071 1.57194 0.999999 2.08065 0.999999 2.61109L1 13.1111C1 13.6415 1.21071 14.1502 1.58579 14.5253C1.96086 14.9004 2.46957 15.1111 3 15.1111L4 15.1111L4 14.1111L3 14.1111C2.73478 14.1111 2.48043 14.0057 2.29289 13.8182C2.10536 13.6307 2 13.3763 2 13.1111L2 2.61109C2 2.34587 2.10536 2.09151 2.29289 1.90398C2.48043 1.71644 2.73478 1.61109 3 1.61109L13 1.61108C13.2652 1.61108 13.5196 1.71644 13.7071 1.90398C13.8946 2.09151 14 2.34587 14 2.61108L14 13.1111C14 13.3763 13.8946 13.6307 13.7071 13.8182C13.5196 14.0057 13.2652 14.1111 13 14.1111L12 14.1111L12 15.1111Z"/>
+                            <path class="fill-secondary" d="M3.55564 16C3.55564 16 2.66675 16 2.66675 15.1111C2.66675 14.2222 3.55564 11.5556 8.00008 11.5556C12.4445 11.5556 13.3334 14.2222 13.3334 15.1111C13.3334 16 12.4445 16 12.4445 16H3.55564ZM8.00008 10.6667C8.70732 10.6667 9.3856 10.3857 9.8857 9.88564C10.3858 9.38554 10.6667 8.70726 10.6667 8.00002C10.6667 7.29278 10.3858 6.6145 9.8857 6.1144C9.3856 5.61431 8.70732 5.33335 8.00008 5.33335C7.29284 5.33335 6.61456 5.61431 6.11446 6.1144C5.61437 6.6145 5.33341 7.29278 5.33341 8.00002C5.33341 8.70726 5.61437 9.38554 6.11446 9.88564C6.61456 10.3857 7.29284 10.6667 8.00008 10.6667Z"/>
+                            <path class="fill-secondary" d="M4.5747 3.4254C4.49135 3.34205 4.44453 3.22901 4.44453 3.11113C4.44453 2.99326 4.49135 2.88021 4.5747 2.79686C4.65805 2.71351 4.7711 2.66669 4.88897 2.66669H11.1112C11.2291 2.66669 11.3421 2.71351 11.4255 2.79686C11.5088 2.88021 11.5556 2.99326 11.5556 3.11113C11.5556 3.22901 11.5088 3.34205 11.4255 3.4254C11.3421 3.50875 11.2291 3.55558 11.1112 3.55558H4.88897C4.7711 3.55558 4.65805 3.50875 4.5747 3.4254Z"/>
+                        </svg>
+                    <span class="ms-2">{{ __('Customers') }}</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Expense') || Gate::check('Manage Expense Category'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-expenses" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path class="fill-secondary" d="M3 4.5C3 4.36739 3.05268 4.24021 3.14645 4.14645C3.24021 4.05268 3.36739 4 3.5 4H9.5C9.63261 4 9.75979 4.05268 9.85355 4.14645C9.94732 4.24021 10 4.36739 10 4.5C10 4.63261 9.94732 4.75979 9.85355 4.85355C9.75979 4.94732 9.63261 5 9.5 5H3.5C3.36739 5 3.24021 4.94732 3.14645 4.85355C3.05268 4.75979 3 4.63261 3 4.5ZM3 6.5C3 6.36739 3.05268 6.24021 3.14645 6.14645C3.24021 6.05268 3.36739 6 3.5 6H9.5C9.63261 6 9.75979 6.05268 9.85355 6.14645C9.94732 6.24021 10 6.36739 10 6.5C10 6.63261 9.94732 6.75979 9.85355 6.85355C9.75979 6.94732 9.63261 7 9.5 7H3.5C3.36739 7 3.24021 6.94732 3.14645 6.85355C3.05268 6.75979 3 6.63261 3 6.5ZM3 8.5C3 8.36739 3.05268 8.24021 3.14645 8.14645C3.24021 8.05268 3.36739 8 3.5 8H9.5C9.63261 8 9.75979 8.05268 9.85355 8.14645C9.94732 8.24021 10 8.36739 10 8.5C10 8.63261 9.94732 8.75979 9.85355 8.85355C9.75979 8.94732 9.63261 9 9.5 9H3.5C3.36739 9 3.24021 8.94732 3.14645 8.85355C3.05268 8.75979 3 8.63261 3 8.5ZM3 10.5C3 10.3674 3.05268 10.2402 3.14645 10.1464C3.24021 10.0527 3.36739 10 3.5 10H9.5C9.63261 10 9.75979 10.0527 9.85355 10.1464C9.94732 10.2402 10 10.3674 10 10.5C10 10.6326 9.94732 10.7598 9.85355 10.8536C9.75979 10.9473 9.63261 11 9.5 11H3.5C3.36739 11 3.24021 10.9473 3.14645 10.8536C3.05268 10.7598 3 10.6326 3 10.5ZM3 12.5C3 12.3674 3.05268 12.2402 3.14645 12.1464C3.24021 12.0527 3.36739 12 3.5 12H9.5C9.63261 12 9.75979 12.0527 9.85355 12.1464C9.94732 12.2402 10 12.3674 10 12.5C10 12.6326 9.94732 12.7598 9.85355 12.8536C9.75979 12.9473 9.63261 13 9.5 13H3.5C3.36739 13 3.24021 12.9473 3.14645 12.8536C3.05268 12.7598 3 12.6326 3 12.5ZM11.5 4C11.3674 4 11.2402 4.05268 11.1464 4.14645C11.0527 4.24021 11 4.36739 11 4.5C11 4.63261 11.0527 4.75979 11.1464 4.85355C11.2402 4.94732 11.3674 5 11.5 5H12.5C12.6326 5 12.7598 4.94732 12.8536 4.85355C12.9473 4.75979 13 4.63261 13 4.5C13 4.36739 12.9473 4.24021 12.8536 4.14645C12.7598 4.05268 12.6326 4 12.5 4H11.5ZM11.5 6C11.3674 6 11.2402 6.05268 11.1464 6.14645C11.0527 6.24021 11 6.36739 11 6.5C11 6.63261 11.0527 6.75979 11.1464 6.85355C11.2402 6.94732 11.3674 7 11.5 7H12.5C12.6326 7 12.7598 6.94732 12.8536 6.85355C12.9473 6.75979 13 6.63261 13 6.5C13 6.36739 12.9473 6.24021 12.8536 6.14645C12.7598 6.05268 12.6326 6 12.5 6H11.5ZM11.5 8C11.3674 8 11.2402 8.05268 11.1464 8.14645C11.0527 8.24021 11 8.36739 11 8.5C11 8.63261 11.0527 8.75979 11.1464 8.85355C11.2402 8.94732 11.3674 9 11.5 9H12.5C12.6326 9 12.7598 8.94732 12.8536 8.85355C12.9473 8.75979 13 8.63261 13 8.5C13 8.36739 12.9473 8.24021 12.8536 8.14645C12.7598 8.05268 12.6326 8 12.5 8H11.5ZM11.5 10C11.3674 10 11.2402 10.0527 11.1464 10.1464C11.0527 10.2402 11 10.3674 11 10.5C11 10.6326 11.0527 10.7598 11.1464 10.8536C11.2402 10.9473 11.3674 11 11.5 11H12.5C12.6326 11 12.7598 10.9473 12.8536 10.8536C12.9473 10.7598 13 10.6326 13 10.5C13 10.3674 12.9473 10.2402 12.8536 10.1464C12.7598 10.0527 12.6326 10 12.5 10H11.5ZM11.5 12C11.3674 12 11.2402 12.0527 11.1464 12.1464C11.0527 12.2402 11 12.3674 11 12.5C11 12.6326 11.0527 12.7598 11.1464 12.8536C11.2402 12.9473 11.3674 13 11.5 13H12.5C12.6326 13 12.7598 12.9473 12.8536 12.8536C12.9473 12.7598 13 12.6326 13 12.5C13 12.3674 12.9473 12.2402 12.8536 12.1464C12.7598 12.0527 12.6326 12 12.5 12H11.5Z" fill="black"/>
+                            <path d="M2.354 0.645978C2.29798 0.589911 2.22943 0.547966 2.154 0.523602C2.07858 0.499238 1.99845 0.493154 1.92021 0.505852C1.84197 0.518549 1.76787 0.549665 1.70403 0.596631C1.64018 0.643598 1.58842 0.70507 1.553 0.775978L1.053 1.77598C1.01815 1.84551 1.00001 1.92221 1 1.99998V15H0.5C0.367392 15 0.240215 15.0527 0.146447 15.1464C0.0526784 15.2402 0 15.3674 0 15.5C0 15.6326 0.0526784 15.7598 0.146447 15.8535C0.240215 15.9473 0.367392 16 0.5 16H15.5C15.6326 16 15.7598 15.9473 15.8536 15.8535C15.9473 15.7598 16 15.6326 16 15.5C16 15.3674 15.9473 15.2402 15.8536 15.1464C15.7598 15.0527 15.6326 15 15.5 15H15V1.99998C15 1.92221 14.9818 1.84551 14.947 1.77598L14.447 0.775978C14.4115 0.705251 14.3598 0.643947 14.296 0.597106C14.2323 0.550265 14.1583 0.519224 14.0802 0.506534C14.0021 0.493843 13.9221 0.499867 13.8468 0.524108C13.7715 0.548349 13.703 0.590117 13.647 0.645978L13 1.29298L12.354 0.645978C12.3076 0.599415 12.2524 0.562472 12.1916 0.537266C12.1309 0.512059 12.0658 0.499084 12 0.499084C11.9342 0.499084 11.8691 0.512059 11.8084 0.537266C11.7476 0.562472 11.6924 0.599415 11.646 0.645978L11 1.29298L10.354 0.645978C10.3076 0.599415 10.2524 0.562472 10.1916 0.537266C10.1309 0.512059 10.0658 0.499084 10 0.499084C9.93423 0.499084 9.86911 0.512059 9.80837 0.537266C9.74762 0.562472 9.69245 0.599415 9.646 0.645978L9 1.29298L8.354 0.645978C8.30755 0.599415 8.25238 0.562472 8.19163 0.537266C8.13089 0.512059 8.06577 0.499084 8 0.499084C7.93423 0.499084 7.86911 0.512059 7.80837 0.537266C7.74762 0.562472 7.69245 0.599415 7.646 0.645978L7 1.29298L6.354 0.645978C6.30755 0.599415 6.25238 0.562472 6.19163 0.537266C6.13089 0.512059 6.06577 0.499084 6 0.499084C5.93423 0.499084 5.86911 0.512059 5.80837 0.537266C5.74762 0.562472 5.69245 0.599415 5.646 0.645978L5 1.29298L4.354 0.645978C4.30755 0.599415 4.25238 0.562472 4.19163 0.537266C4.13089 0.512059 4.06577 0.499084 4 0.499084C3.93423 0.499084 3.86911 0.512059 3.80837 0.537266C3.74762 0.562472 3.69245 0.599415 3.646 0.645978L3 1.29298L2.354 0.645978ZM2.137 1.84398L2.647 2.35398C2.74076 2.44771 2.86792 2.50037 3.0005 2.50037C3.13308 2.50037 3.26024 2.44771 3.354 2.35398L4 1.70698L4.646 2.35398C4.69245 2.40054 4.74762 2.43748 4.80837 2.46269C4.86911 2.4879 4.93423 2.50087 5 2.50087C5.06577 2.50087 5.13089 2.4879 5.19163 2.46269C5.25238 2.43748 5.30755 2.40054 5.354 2.35398L6 1.70698L6.646 2.35398C6.69245 2.40054 6.74762 2.43748 6.80837 2.46269C6.86911 2.4879 6.93423 2.50087 7 2.50087C7.06577 2.50087 7.13089 2.4879 7.19163 2.46269C7.25238 2.43748 7.30755 2.40054 7.354 2.35398L8 1.70698L8.646 2.35398C8.69245 2.40054 8.74762 2.43748 8.80837 2.46269C8.86911 2.4879 8.93423 2.50087 9 2.50087C9.06577 2.50087 9.13089 2.4879 9.19163 2.46269C9.25238 2.43748 9.30755 2.40054 9.354 2.35398L10 1.70698L10.646 2.35398C10.6924 2.40054 10.7476 2.43748 10.8084 2.46269C10.8691 2.4879 10.9342 2.50087 11 2.50087C11.0658 2.50087 11.1309 2.4879 11.1916 2.46269C11.2524 2.43748 11.3076 2.40054 11.354 2.35398L12 1.70698L12.646 2.35398C12.6924 2.40054 12.7476 2.43748 12.8084 2.46269C12.8691 2.4879 12.9342 2.50087 13 2.50087C13.0658 2.50087 13.1309 2.4879 13.1916 2.46269C13.2524 2.43748 13.3076 2.40054 13.354 2.35398L13.863 1.84398L14 2.11798V15H2V2.11798L2.137 1.84398Z" fill="black"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Expenses') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'show' : '' }}" id="menu-expenses">
+                        @can('Manage Expense')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Expense') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Expense Category')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'expense_category') ? 'active' : '' }}" href="auth-404.html">{{ __('Category') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Contact'))
+                <li>
+                    <a class="m-link {{ (Request::segment(1) == "contacts") ? 'active' : '' }}" href="{{ url('/') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M7.99997 1C5.785 1 4.51323 1.52678 3.57555 2.46447C2.63787 3.40215 2.11108 4.67392 2.11108 6V7H3.11108C3.3763 7 3.63065 7.10536 3.81819 7.29289C4.00573 7.48043 4.11108 7.73478 4.11108 8V11C4.11108 11.2652 4.00573 11.5196 3.81819 11.7071C3.63065 11.8946 3.3763 12 3.11108 12H2.11108C1.84587 12 1.59151 11.8946 1.40398 11.7071C1.21644 11.5196 1.11108 11.2652 1.11108 11V6C1.11108 5.21207 1.26628 4.43185 1.56781 3.7039C1.86933 2.97595 2.31129 2.31451 2.86844 1.75736C3.4256 1.20021 4.08703 0.758251 4.81498 0.456723C5.54294 0.155195 6.32315 0 7.99997 0C9.67679 0 10.457 0.155195 11.185 0.456723C11.9129 0.758251 12.5744 1.20021 13.1315 1.75736C13.6887 2.31451 14.1306 2.97595 14.4321 3.7039C14.7337 4.43185 14.8889 5.21207 14.8889 6V12C14.8889 12.663 14.6255 13.2989 14.1566 13.7678C13.6878 14.2366 13.0519 14.5 12.3889 14.5H10.2549C10.1671 14.652 10.0409 14.7783 9.88885 14.866C9.73683 14.9538 9.56439 15 9.38886 15H8.38886C8.12365 15 7.86929 14.8946 7.68176 14.7071C7.49422 14.5196 7.38886 14.2652 7.38886 14C7.38886 13.7348 7.49422 13.4804 7.68176 13.2929C7.86929 13.1054 8.12365 13 8.38886 13H9.38886C9.56439 13 9.73683 13.0462 9.88885 13.134C10.0409 13.2217 10.1671 13.348 10.2549 13.5H12.3889C12.7867 13.5 13.1682 13.342 13.4495 13.0607C13.7308 12.7794 13.8889 12.3978 13.8889 12H12.8889C12.6236 12 12.3693 11.8946 12.1818 11.7071C11.9942 11.5196 11.8889 11.2652 11.8889 11V8C11.8889 7.73478 11.9942 7.48043 12.1818 7.29289C12.3693 7.10536 12.6236 7 12.8889 7H13.8889V6C13.8889 5.34339 13.7595 4.69321 13.5083 4.08658C13.257 3.47995 12.8887 2.92876 12.4244 2.46447C11.9601 2.00017 11.4089 1.63188 10.8023 1.3806C10.1957 1.12933 8.65658 1 7.99997 1Z"/>
+                            <path class="fill-secondary" d="M5.7777 11.5555C5.7777 11.5555 5.33325 11.5555 5.33325 11.1407C5.33325 10.7259 5.7777 9.48146 7.99992 9.48146C10.2221 9.48146 10.6666 10.7259 10.6666 11.1407C10.6666 11.5555 10.2221 11.5555 10.2221 11.5555H5.7777ZM7.99992 9.06665C8.35354 9.06665 8.69268 8.93554 8.94273 8.70216C9.19278 8.46878 9.33325 8.15225 9.33325 7.8222C9.33325 7.49215 9.19278 7.17563 8.94273 6.94225C8.69268 6.70887 8.35354 6.57776 7.99992 6.57776C7.6463 6.57776 7.30716 6.70887 7.05711 6.94225C6.80706 7.17563 6.66659 7.49215 6.66659 7.8222C6.66659 8.15225 6.80706 8.46878 7.05711 8.70216C7.30716 8.93554 7.6463 9.06665 7.99992 9.06665Z"/>
+                            <path class="fill-secondary" d="M6.28723 5.68738C6.24555 5.64848 6.22214 5.59573 6.22214 5.54072C6.22214 5.48571 6.24555 5.43296 6.28723 5.39406C6.3289 5.35516 6.38543 5.33331 6.44436 5.33331H9.55547C9.61441 5.33331 9.67093 5.35516 9.71261 5.39406C9.75428 5.43296 9.7777 5.48571 9.7777 5.54072C9.7777 5.59573 9.75428 5.64848 9.71261 5.68738C9.67093 5.72628 9.61441 5.74813 9.55547 5.74813H6.44436C6.38543 5.74813 6.3289 5.72628 6.28723 5.68738Z"/>
+                        </svg>
+                    <span class="ms-2">{{ __('Contacts') }}</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Payment'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'roles' || Request::segment(1) == 'permissions') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-payment" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M14 3C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V12C15 12.2652 14.8946 12.5196 14.7071 12.7071C14.5196 12.8946 14.2652 13 14 13H2C1.73478 13 1.48043 12.8946 1.29289 12.7071C1.10536 12.5196 1 12.2652 1 12V4C1 3.73478 1.10536 3.48043 1.29289 3.29289C1.48043 3.10536 1.73478 3 2 3H14ZM2 2C1.46957 2 0.960859 2.21071 0.585786 2.58579C0.210714 2.96086 0 3.46957 0 4L0 12C0 12.5304 0.210714 13.0391 0.585786 13.4142C0.960859 13.7893 1.46957 14 2 14H14C14.5304 14 15.0391 13.7893 15.4142 13.4142C15.7893 13.0391 16 12.5304 16 12V4C16 3.46957 15.7893 2.96086 15.4142 2.58579C15.0391 2.21071 14.5304 2 14 2H2Z"/>
+                            <path class="fill-secondary" d="M2 5.5C2 5.36739 2.05268 5.24021 2.14645 5.14645C2.24021 5.05268 2.36739 5 2.5 5H4.5C4.63261 5 4.75979 5.05268 4.85355 5.14645C4.94732 5.24021 5 5.36739 5 5.5V6.5C5 6.63261 4.94732 6.75979 4.85355 6.85355C4.75979 6.94732 4.63261 7 4.5 7H2.5C2.36739 7 2.24021 6.94732 2.14645 6.85355C2.05268 6.75979 2 6.63261 2 6.5V5.5ZM2 8.5C2 8.36739 2.05268 8.24021 2.14645 8.14645C2.24021 8.05268 2.36739 8 2.5 8H7.5C7.63261 8 7.75979 8.05268 7.85355 8.14645C7.94732 8.24021 8 8.36739 8 8.5C8 8.63261 7.94732 8.75979 7.85355 8.85355C7.75979 8.94732 7.63261 9 7.5 9H2.5C2.36739 9 2.24021 8.94732 2.14645 8.85355C2.05268 8.75979 2 8.63261 2 8.5ZM2 10.5C2 10.3674 2.05268 10.2402 2.14645 10.1464C2.24021 10.0527 2.36739 10 2.5 10H3.5C3.63261 10 3.75979 10.0527 3.85355 10.1464C3.94732 10.2402 4 10.3674 4 10.5C4 10.6326 3.94732 10.7598 3.85355 10.8536C3.75979 10.9473 3.63261 11 3.5 11H2.5C2.36739 11 2.24021 10.9473 2.14645 10.8536C2.05268 10.7598 2 10.6326 2 10.5ZM5 10.5C5 10.3674 5.05268 10.2402 5.14645 10.1464C5.24021 10.0527 5.36739 10 5.5 10H6.5C6.63261 10 6.75979 10.0527 6.85355 10.1464C6.94732 10.2402 7 10.3674 7 10.5C7 10.6326 6.94732 10.7598 6.85355 10.8536C6.75979 10.9473 6.63261 11 6.5 11H5.5C5.36739 11 5.24021 10.9473 5.14645 10.8536C5.05268 10.7598 5 10.6326 5 10.5ZM8 10.5C8 10.3674 8.05268 10.2402 8.14645 10.1464C8.24021 10.0527 8.36739 10 8.5 10H9.5C9.63261 10 9.75979 10.0527 9.85355 10.1464C9.94732 10.2402 10 10.3674 10 10.5C10 10.6326 9.94732 10.7598 9.85355 10.8536C9.75979 10.9473 9.63261 11 9.5 11H8.5C8.36739 11 8.24021 10.9473 8.14645 10.8536C8.05268 10.7598 8 10.6326 8 10.5ZM11 10.5C11 10.3674 11.0527 10.2402 11.1464 10.1464C11.2402 10.0527 11.3674 10 11.5 10H12.5C12.6326 10 12.7598 10.0527 12.8536 10.1464C12.9473 10.2402 13 10.3674 13 10.5C13 10.6326 12.9473 10.7598 12.8536 10.8536C12.7598 10.9473 12.6326 11 12.5 11H11.5C11.3674 11 11.2402 10.9473 11.1464 10.8536C11.0527 10.7598 11 10.6326 11 10.5Z"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Payments') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'roles' || Request::segment(1) == 'permissions') ? 'show' : '' }}" id="menu-payment">
+                        @can('Manage Role')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'roles') ? 'active' : '' }}" href="auth-404.html">{{ __('Roles') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Permission')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'permissions') ? 'active' : '' }}" href="auth-404.html">{{ __('Permissions') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Branch'))
+                <li>
+                    <a class="m-link {{ (Request::segment(1) == "branches") ? 'active' : '' }}" href="{{ route("branches.index") }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M6 3.5C6 3.10218 6.15804 2.72064 6.43934 2.43934C6.72064 2.15804 7.10218 2 7.5 2H8.5C8.89782 2 9.27936 2.15804 9.56066 2.43934C9.84196 2.72064 10 3.10218 10 3.5V4.5C10 4.89782 9.84196 5.27936 9.56066 5.56066C9.27936 5.84196 8.89782 6 8.5 6V7H14C14.1326 7 14.2598 7.05268 14.3536 7.14645C14.4473 7.24021 14.5 7.36739 14.5 7.5V8.5C14.5 8.63261 14.4473 8.75979 14.3536 8.85355C14.2598 8.94732 14.1326 9 14 9C13.8674 9 13.7402 8.94732 13.6464 8.85355C13.5527 8.75979 13.5 8.63261 13.5 8.5V8H8.5V8.5C8.5 8.63261 8.44732 8.75979 8.35355 8.85355C8.25979 8.94732 8.13261 9 8 9C7.86739 9 7.74021 8.94732 7.64645 8.85355C7.55268 8.75979 7.5 8.63261 7.5 8.5V8H2.5V8.5C2.5 8.63261 2.44732 8.75979 2.35355 8.85355C2.25979 8.94732 2.13261 9 2 9C1.86739 9 1.74021 8.94732 1.64645 8.85355C1.55268 8.75979 1.5 8.63261 1.5 8.5V7.5C1.5 7.36739 1.55268 7.24021 1.64645 7.14645C1.74021 7.05268 1.86739 7 2 7H7.5V6C7.10218 6 6.72064 5.84196 6.43934 5.56066C6.15804 5.27936 6 4.89782 6 4.5V3.5Z"/>
+                            <path class="fill-secondary" d="M0.43934 10.4393C0.158035 10.7206 0 11.1022 0 11.5V12.5C0 12.8978 0.158035 13.2794 0.43934 13.5607C0.720644 13.842 1.10218 14 1.5 14H2.5C2.89782 14 3.27936 13.842 3.56066 13.5607C3.84196 13.2794 4 12.8978 4 12.5V11.5C4 11.1022 3.84196 10.7206 3.56066 10.4393C3.27936 10.158 2.89782 10 2.5 10H1.5C1.10218 10 0.720644 10.158 0.43934 10.4393Z"/>
+                            <path class="fill-secondary" d="M6.43934 10.4393C6.15804 10.7206 6 11.1022 6 11.5V12.5C6 12.8978 6.15804 13.2794 6.43934 13.5607C6.72064 13.842 7.10218 14 7.5 14H8.5C8.89782 14 9.27936 13.842 9.56066 13.5607C9.84196 13.2794 10 12.8978 10 12.5V11.5C10 11.1022 9.84196 10.7206 9.56066 10.4393C9.27936 10.158 8.89782 10 8.5 10H7.5C7.10218 10 6.72064 10.158 6.43934 10.4393Z"/>
+                            <path class="fill-secondary" d="M12.4393 10.4393C12.158 10.7206 12 11.1022 12 11.5V12.5C12 12.8978 12.158 13.2794 12.4393 13.5607C12.7206 13.842 13.1022 14 13.5 14H14.5C14.8978 14 15.2794 13.842 15.5607 13.5607C15.842 13.2794 16 12.8978 16 12.5V11.5C16 11.1022 15.842 10.7206 15.5607 10.4393C15.2794 10.158 14.8978 10 14.5 10H13.5C13.1022 10 12.7206 10.158 12.4393 10.4393Z"/>
+                        </svg>
+                    <span class="ms-2">{{ __('Branches') }}</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Notification') || Gate::check('Manage Todo') || Gate::check('Manage Calendar'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'notifications' || Request::segment(1) == 'calendars' || Request::segment(1) == 'todos') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-notify" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M7.97188 0C3.58125 0 0 3.58125 0 8C0 12.4187 3.58125 16 8 16C12.4188 16 15.9719 12.4187 15.9719 8.02812C15.9719 3.6375 12.4188 0 7.97188 0ZM13.0188 11.2781L10.35 11.2376L9.56406 13.7873C9.06563 13.9219 8.54375 14 8 14C7.45625 14 6.93469 13.9212 6.43469 13.7857L5.65 11.2375L2.98125 11.278C2.415 10.4137 2.07031 9.39459 2.01625 8.29959L4.19687 6.7625L3.33125 4.2375C3.9925 3.41844 4.86531 2.78094 5.86438 2.39875L8 4L10.1341 2.39937C11.1334 2.78156 12.0059 3.41937 12.6672 4.23812L11.8031 6.7625L13.9838 8.29688C13.9313 9.39375 13.5875 10.4125 13.0188 11.2781Z" fill="black"/>
+                            <path class="fill-secondary" d="M6.49692 9.99999L5.53442 7.14374L8.00005 5.37811L10.4382 7.14436L9.51255 9.99999H6.49692Z" fill="black"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Notification') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'notifications' || Request::segment(1) == 'calendars' || Request::segment(1) == 'todos') ? 'show' : '' }}" id="menu-notify">
+                        @can('Manage Notification')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'notifications') ? 'active' : '' }}" href="auth-404.html">{{ __('Notification') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Todo')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'todos') ? 'active' : '' }}" href="auth-404.html">{{ __('Todo') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Calendar')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'calendars') ? 'active' : '' }}" href="auth-404.html">{{ __('Calendar') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Role') || Gate::check('Manage Permission'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'roles' || Request::segment(1) == 'permissions') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-roles" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M5.33801 1.59C4.38559 1.85248 3.43965 2.1379 2.50101 2.446C2.41529 2.47376 2.3391 2.52504 2.28111 2.59399C2.22312 2.66295 2.18567 2.7468 2.17301 2.836C1.61901 6.993 2.89901 10.026 4.42601 12.024C5.07252 12.8784 5.84341 13.6311 6.71301 14.257C7.05901 14.501 7.36501 14.677 7.60601 14.79C7.72601 14.847 7.82401 14.885 7.89901 14.908C7.93181 14.9195 7.96562 14.9279 8.00001 14.933C8.03398 14.9275 8.06743 14.9191 8.10001 14.908C8.17601 14.885 8.27401 14.847 8.39401 14.79C8.63401 14.677 8.94101 14.5 9.28701 14.257C10.1566 13.6311 10.9275 12.8784 11.574 12.024C13.101 10.027 14.381 6.993 13.827 2.836C13.8145 2.74676 13.777 2.66285 13.719 2.59388C13.661 2.52491 13.5848 2.47366 13.499 2.446C12.848 2.233 11.749 1.886 10.662 1.591C9.55201 1.29 8.53101 1.067 8.00001 1.067C7.47001 1.067 6.44801 1.289 5.33801 1.59ZM5.07201 0.56C6.15701 0.265 7.31001 0 8.00001 0C8.69001 0 9.84301 0.265 10.928 0.56C12.038 0.86 13.157 1.215 13.815 1.43C14.0901 1.52085 14.334 1.68747 14.5187 1.9107C14.7034 2.13394 14.8213 2.40474 14.859 2.692C15.455 7.169 14.072 10.487 12.394 12.682C11.6824 13.621 10.834 14.4479 9.87701 15.135C9.5461 15.3728 9.19549 15.5819 8.82901 15.76C8.54901 15.892 8.24801 16 8.00001 16C7.75201 16 7.45201 15.892 7.17101 15.76C6.80452 15.5819 6.45391 15.3728 6.12301 15.135C5.16603 14.4478 4.31759 13.621 3.60601 12.682C1.92801 10.487 0.545005 7.169 1.14101 2.692C1.17869 2.40474 1.29665 2.13394 1.48132 1.9107C1.666 1.68747 1.9099 1.52085 2.18501 1.43C3.1402 1.11681 4.10281 0.826725 5.07201 0.56Z"/>
+                            <path class="fill-secondary" d="M8 5.38462C8.21217 5.38462 8.41566 5.46566 8.56569 5.60992C8.71571 5.75418 8.8 5.94983 8.8 6.15385V6.53846H7.2V6.15385C7.2 5.94983 7.28429 5.75418 7.43431 5.60992C7.58434 5.46566 7.78783 5.38462 8 5.38462ZM9.2 6.53846V6.15385C9.2 5.84783 9.07357 5.55434 8.84853 5.33795C8.62348 5.12157 8.31826 5 8 5C7.68174 5 7.37652 5.12157 7.15147 5.33795C6.92643 5.55434 6.8 5.84783 6.8 6.15385V6.53846C6.58783 6.53846 6.38434 6.61951 6.23431 6.76376C6.08429 6.90802 6 7.10368 6 7.30769V9.23077C6 9.43478 6.08429 9.63044 6.23431 9.7747C6.38434 9.91896 6.58783 10 6.8 10H9.2C9.41217 10 9.61566 9.91896 9.76569 9.7747C9.91571 9.63044 10 9.43478 10 9.23077V7.30769C10 7.10368 9.91571 6.90802 9.76569 6.76376C9.61566 6.61951 9.41217 6.53846 9.2 6.53846Z"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Roles & Permissions') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'roles' || Request::segment(1) == 'permissions') ? 'show' : '' }}" id="menu-roles">
+                        @can('Manage Role')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'roles') ? 'active' : '' }}" href="auth-404.html">{{ __('Roles') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Permission')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'permissions') ? 'active' : '' }}" href="auth-404.html">{{ __('Permissions') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Order'))
+                <li>
+                    <a class="m-link {{ (Request::segment(1) == "orders") ? 'active' : '' }}" href="{{ url('/') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M0 3H16V4H0V3Z"/>
+                            <path d="M9 1H14V6H9V1Z"/>
+                            <path d="M0 13H16V14H0V13Z"/>
+                            <path d="M9 11H14V16H9V11Z"/>
+                            <path class="fill-secondary" d="M0 8H16V9H0V8Z"/>
+                            <path class="fill-secondary" d="M2 6H7V11H2V6Z"/>
+                        </svg>
+                    <span class="ms-2">{{ __('Orders') }}</span>
+                    </a>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Activity Log'))
+                <li>
+                    <a class="m-link {{ (Request::segment(1) == "activity_log") ? 'active' : '' }}" href="{{ url('/') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M9 4.25V0H2.75C2.33437 0 2 0.334375 2 0.75V15.25C2 15.6656 2.33437 16 2.75 16H13.25C13.6656 16 14 15.6656 14 15.25V5H9.75C9.3375 5 9 4.6625 9 4.25Z"></path>
+                            <path class="fill-secondary" d="M14 4V3.80938C14 3.6125 13.9219 3.42188 13.7812 3.28125L10.7219 0.21875C10.5813 0.078125 10.3906 0 10.1906 0H10V4H14Z"></path>
+                        </svg>
+                    <span class="ms-2">{{ __('Activity Log') }}</span>
+                    </a>
+                </li>
+            @endif
           </ul>
        </div>
-       <!-- sidebar: footer link -->
-       <ul class="menu-list nav navbar-nav flex-row text-center">
-          <li class="nav-item flex-fill p-2">
-             <a class="d-inline-block w-100 color-400" href="#" data-bs-toggle="modal" data-bs-target="#ScheduleModal" title="My Schedule">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                   <path class="fill-secondary" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                   <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                   <path class="fill-secondary" d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                </svg>
-             </a>
-          </li>
-          <li class="nav-item flex-fill p-2">
-             <a class="d-inline-block w-100 color-400" href="#" data-bs-toggle="modal" data-bs-target="#MynotesModal" title="My notes">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                   <path class="fill-secondary" d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"/>
-                   <path d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z"/>
-                </svg>
-             </a>
-          </li>
-          <li class="nav-item flex-fill p-2">
-             <a class="d-inline-block w-100 color-400" href="#" data-bs-toggle="modal" data-bs-target="#RecentChat">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                   <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                   <path class="fill-secondary" d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z"/>
-                </svg>
-             </a>
-          <li class="nav-item flex-fill p-2">
-             <a class="d-inline-block w-100 color-400" href="auth-signin.html" title="sign-out">
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                   <path d="M7.5 1v7h1V1h-1z"/>
-                   <path class="fill-secondary" d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z"/>
-                </svg>
-             </a>
-          </li>
-       </ul>
     </div>
  </div>
