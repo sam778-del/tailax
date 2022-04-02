@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('page-title', __('Branches List') )
+@section('page-title', __('Services List') )
 
 @section('page-toolbar')
 <div class="row mb-3 align-items-center">
     <div class="col">
        <ol class="breadcrumb bg-transparent mb-0">
           <li class="breadcrumb-item"><a class="text-secondary" href="{{ url("/") }}">{{ __('Dashboard') }}</a></li>
-          <li class="breadcrumb-item active" aria-current="page">{{ __('Branches') }}</li>
+          <li class="breadcrumb-item active" aria-current="page">{{ __('Services') }}</li>
        </ol>
     </div>
 </div>
@@ -22,11 +22,11 @@
             <div class="col ml-n2">
             </div>
             {{-- End of other widget --}}
-            @can('Create Branch')
+            @can('Create Service')
                 <div class="col-auto d-none d-md-inline-block">
-                    <a href="{{ route("branches.create") }}" class="btn btn-primary">
+                    <a href="{{ route("services.create") }}" class="btn btn-primary">
                         <i class="bi bi-plus-lg"></i>
-                        {{ __('Create Branch') }}
+                        {{ __('Create Service') }}
                     </a>
                 </div>
             @endcan
@@ -34,15 +34,17 @@
     </div>
     <div class="card">
         <div class="card-body">
-            <table id="branch_list" class="table align-middle mb-0 card-table" cellspacing="0">
+            <table id="table_list" class="table align-middle mb-0 card-table" cellspacing="0">
                 <thead>
                     <tr>
                         <th>{{ __('Service Code') }}</th>
+                        <th class="text-center">{{ __('Service Image') }}</th>
                         <th>{{ __('Service Name') }}</th>
                         <th>{{ __('Service Amount') }}</th>
                         <th>{{ __('Branch Name') }}</th>
                         <th>{{ __('Created By') }}</th>
                         <th>{{ __('Description') }}</th>
+                        <th>{{ __('Status') }}</th>
                         <th>{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -55,7 +57,7 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        var table = $('#branch_list')
+        var table = $('#table_list')
         .addClass( 'nowrap' )
         .dataTable( {
             responsive: true,
@@ -64,8 +66,14 @@
             serverSide: true,
             ajax: '{{ route('services.datatables') }}',
             columns: [
+                { data: 'code', code: 'code' },
+                { data: 'image', image: 'image' },
                 { data: 'name', name: 'name' },
+                { data: 'amount', amount: 'amount' },
+                {data: 'branch_name', branch_name: 'branch_name'},
                 {data: 'created_by', created_by: 'created_by'},
+                { data: 'description', description: 'description' },
+                { data: 'status', status: 'status' },
                 { data: 'action', searchable: false, orderable: false }
             ],
             language : {
@@ -92,7 +100,7 @@
                         _token: "{!! csrf_token() !!}"
                     },
                     success: function(data) {
-                        var oTable = $('#branch_list').dataTable();
+                        var oTable = $('#table_list').dataTable();
                         oTable.fnDraw(false);
                         if(data.status == true){
                             toastr.success("{{__('Success') }}", data.msg, 'success');

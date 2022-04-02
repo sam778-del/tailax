@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use App\Models\Currency;
 
 class User extends Authenticatable
 {
@@ -58,9 +59,26 @@ class User extends Authenticatable
         return ($this->parent_id == '0' || $this->parent_id == '1') ? $this->id : $this->parent_id;
     }
 
-    public function getUserDefaultCurrency()
+    public function getDefaultCurrency()
     {
+        $currency = Currency::where("is_default", 1)->first();
+        if(!empty($currency))
+        {
+            return $currency->currency_symbol;
+        }else{
+            return '$';
+        }
+    }
 
+    public function getDefaultCurrencyAmount()
+    {
+        $currency = Currency::where("is_default", 1)->first();
+        if(!empty($currency))
+        {
+            return $currency->amount;
+        }else{
+            return 1;
+        }
     }
 
     public function isAdmin()
