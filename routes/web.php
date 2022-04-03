@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,4 @@ Route::patch('/currency-status/{currency_id}', [CurrencyController::class, 'chan
 Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::get('get-customers', [CustomerController::class, 'datatables'])
         ->middleware('auth')
-        ->name('customers.default');
+        ->name('customers.datatables');

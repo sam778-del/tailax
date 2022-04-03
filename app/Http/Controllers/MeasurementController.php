@@ -18,4 +18,14 @@ class MeasurementController extends Controller
 
         }
     }
+
+    public function index()
+    {
+        if(Auth::user()->can('Manage Measurement'))
+        {
+
+        }else{
+            return redirect()->back()->with('error', __('Permsission Denied.'));
+        }
+    }
 }
