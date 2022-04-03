@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="card-body">
-                {!! Form::open(["route" => ["services.update", $service->id], "method" => "PATCH", "id" => "submit-form"]) !!}
+                {!! Form::open(["route" => ["services.update", $service->id], "method" => "PATCH", "id" => "submit-form", "enctype" => "multipart/form-data"]) !!}
                 @if(Auth::user()->parent_id === 0 && Auth::user()->isAdmin())
                     <div class="row mb-4">
                         <label class="col-xl-2 col-sm-3 col-form-label">{{ __('Service Branch') }} *</label>
@@ -86,10 +86,6 @@
 
 @push('scripts')
 <script src="{{ asset("/bundles/dropify.bundle.js") }}"></script>
-<script src="{{ asset("/bundles/inputmask.bundle.js") }}"></script>
-<script>
-    Inputmask("{{ Auth::user()->getDefaultCurrency() }} 999,999,999", { "numericInput": true, "autoUnmask": true, }).mask("#inputmask_currency");
-</script>
 <script>
     $(function() {
         $('.dropify').dropify();

@@ -16,10 +16,9 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 100)->nullable()->default('Lores Pium');
-            $table->integer('phone_number')->unsigned()->nullable()->default(12);
+            $table->string('name', 100);
+            $table->string('phone_number')->nullable();
             $table->string('email')->unique();
-            $table->float('amount')->nullable()->default(0.00);
             $table->string('branch_id')->default("0");
             $table->longText('address')->nullable();
             $table->longText('description')->nullable();

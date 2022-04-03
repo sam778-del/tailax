@@ -27,4 +27,14 @@ class Customer extends Model
     {
         return $this->hasOne(User::class, 'id', 'created_by');
     }
+
+    /**
+     * Get the branch associated with the Customer
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function branch()
+    {
+        return $this->hasOne(Branch::class, 'id', 'branch_id');
+    }
 }

@@ -30,7 +30,7 @@
                 </div>
             </div>
             <div class="card-body">
-                {!! Form::open(["route" => ["services.store"], "method" => "POST", "id" => "submit-form"]) !!}
+                {!! Form::open(["route" => ["services.store"], "method" => "POST", "id" => "submit-form", "enctype" => "multipart/form-data"]) !!}
                 @if(Auth::user()->parent_id === 0 && Auth::user()->isAdmin())
                     <div class="row mb-4">
                         <label class="col-xl-2 col-sm-3 col-form-label">{{ __('Service Branch') }} *</label>
@@ -105,31 +105,8 @@
     $('button[type="submit"]').on("click", function(e) {
         e.preventDefault();
         var myForm = document.getElementById('submit-form');
-        var formData = new FormData(myForm);
         $('button[type="submit"]').prop("disabled", true);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: "{{ route("services.store") }}",
-            method: "POST",
-            data: formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-                if(data.status === false){
-                    $('button[type="submit"]').prop("disabled", false);
-                    $('#submit-form').trigger("reset");
-                    toastr.error("{{__('Error') }}", data.msg, 'error');
-                }else{
-                    toastr.success("{{__('Success') }}", data.msg, 'success');
-                    window.location.href = "{{ route("services.index") }}";
-                }
-            }
-        });
+        myForm.submit();
     });
 </script>
 @endpush

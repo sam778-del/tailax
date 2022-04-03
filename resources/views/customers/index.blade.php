@@ -19,7 +19,7 @@
     <div class="row-title  card-body border-bottom">
         <div class="col col-3">
             @if(Auth::user()->isAdmin() && ! Auth::user()->isUser())
-                {!! Form::select('branch_name', $branches, null, ["class" => "form-select", "id" => "searchBranch"]) !!}
+                {!! Form::select('service_branch', $branches, null, ["class" => "form-select", "id" => "searchBranch"]) !!}
             @endif
         </div>
         <div class="btn-group" role="group">
@@ -39,8 +39,8 @@
                         <th>{{ __('Customer Name') }}</th>
                         <th class="text-center">{{ __('Customer Image') }}</th>
                         <th>{{ __('Customer Email') }}</th>
-                        <th>{{ __('Customer Balance') }}</th>
-                        <th>{{ __('Customer Measurement') }}</th>
+                        <th class="text-center">{{ __('Customer Branch') }}</th>
+                        <th class="text-center">{{ __('Customer Measurement') }}</th>
                         <th>{{ __('Action') }}</th>
                     </tr>
                 </thead>
@@ -62,15 +62,15 @@
             serverSide: true,
             ajax: {
                 url: '{{ route('customers.datatables') }}',
-                // data: function(d) {
-                //     d.status = $('#searchStatus').val()
-                // }
+                data: function(d) {
+                    d.service_branch = $('#searchBranch').val()
+                }
             },
             columns: [
                 { data: 'name', code: 'name' },
                 { data: 'image', image: 'image' },
                 { data: 'email', name: 'email' },
-                { data: 'amount', amount: 'amount' },
+                { data: 'branch_name', amount: 'branch_name' },
                 { data: 'measurement', searchable: false, orderable: false },
                 { data: 'action', searchable: false, orderable: false }
             ],

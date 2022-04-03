@@ -108,19 +108,21 @@ class ServiceController extends Controller
                     "service_branch" => "required|numeric",
                     "service_code" => "required|unique:services,code|max:100",
                     "service_name" => "required|unique:services,name|max:100",
+                    'service_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
                     "service_amount" => "required|numeric"
                 ]);
             }else{
                 $validator = Validator::make($request->all(), [
                     "service_code" => "required|unique:services,code|max:100",
                     "service_name" => "required|unique:services,name|max:100",
+                    'service_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
                     "service_amount" => "required|numeric",
                 ]);
             }
 
             if($validator->fails())
             {
-                return response()->json(["status" => false, "msg" => $validator->errors()->first()]);
+                return redirect()->back()->with("error", $validator->errors()->first());
             }
 
             $service        = new Service();
@@ -128,15 +130,6 @@ class ServiceController extends Controller
             $service->name  = $request->input("service_name");
             $service->amount  = $request->input("service_amount");
             if($request->hasFile('service_image')){
-                $validator = Validator::make($request->all(), [
-                    'service_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
-                ]);
-
-                if($validator->fails())
-                {
-                    return response()->json(["status" => false, "msg" => $validator->errors()->first()]);
-                }
-
                 $filenameWithExt = $request->file('service_image')->getClientOriginalName();
                 $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension       = $request->file('service_image')->getClientOriginalExtension();
@@ -154,9 +147,9 @@ class ServiceController extends Controller
             }
             $service->created_by = Auth::user()->CreatedBy();
             $service->save();
-            return response()->json(["status" => true, "msg" => __("Service created successfully.")]);
+            return redirect()->route("services.index")->with("success", __("Service updated successfully."));
         }else{
-            return response()->json(["status" => false, "msg" => __('Permission Denied.')]);
+            return redirect()->back()->with("error", __('Permission Denied.'));
         }
     }
 
@@ -183,12 +176,14 @@ class ServiceController extends Controller
                     "service_branch" => "required|numeric",
                     "service_code" => "required|unique:services,code," . $service->id . "id|max:100",
                     "service_name" => "required|unique:services,name," . $service->id . "id|max:100",
+                    'service_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
                     "service_amount" => "required|numeric"
                 ]);
             }else{
                 $validator = Validator::make($request->all(), [
                     "service_code" => "required|unique:services,code," . $service->id . "id|max:100",
                     "service_name" => "required|unique:services,name," . $service->id . "id|max:100",
+                    'service_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
                     "service_amount" => "required|numeric",
                 ]);
             }
@@ -202,15 +197,6 @@ class ServiceController extends Controller
             $service->name  = $request->input("service_name");
             $service->amount  = $request->input("service_amount");
             if($request->hasFile('service_image')){
-                $validator = Validator::make($request->all(), [
-                    'service_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
-                ]);
-
-                if($validator->fails())
-                {
-                    return redirect()->back()->with("error", $validator->errors()->first());
-                }
-
                 if(asset(Storage::exists($service->image)))
                 {
                     asset(Storage::delete($service->image));

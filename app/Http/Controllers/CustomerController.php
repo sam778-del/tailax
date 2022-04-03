@@ -36,6 +36,14 @@ class CustomerController extends Controller
             }
 
             return Datatables::of($customers)
+                                ->addColumn('branch_name', function(Customer $customer) {
+                                    return '<p class="text-center">'. $customer->branch->name .'</p>';
+                                })
+                                ->filter(function ($instance) use ($request) {
+                                    if(!empty($request->get('service_branch'))){
+                                        $instance->where('branch_id', '=', $request->get('service_branch'));
+                                    }
+                                })
                                 ->addColumn('measurement', function(Customer $customer) {
                                     return '<p class="text-center"><a href=" '.route('customers.edit', $customer->id).' " class="btn btn-link btn-sm color-400"><i class="fa fa-eye"></i></a></p>';
                                 })
@@ -46,9 +54,6 @@ class CustomerController extends Controller
                                     $customer_image = !empty(asset(Storage::url($customer->imgae))) ? asset(Storage::url($customer->imgae)) : asset(STorage::url('avatar/avatar.jpg'));
                                     return '<div class="d-flex align-items-center"><img src="{{ $customer_image }}" class="rounded-circle sm" alt=""></div>';
                                 })
-                                ->editColumn('amount', function(Customer $customer) {
-                                    return '<p class="text-center">'. Auth::user()->getDefaultCurrency().number_format($customer->amount, 2) .'</p>';
-                                })
                                 ->editColumn('description', function(Customer $customer) {
                                     return '<p>'. Str::limit($customer->description, 100, '...') .'</p>';
                                 })
@@ -58,7 +63,7 @@ class CustomerController extends Controller
                                 ->addColumn('action', function(Customer $data) {
                                     return '<a href=" '.route('customers.edit', $data->id).' " class="btn btn-link btn-sm color-400"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0);" onclick="deleteAction(&quot;' . route('customers.destroy', $data->id) . '&quot)" class="btn btn-link btn-sm color-400"><i class="fa fa-trash"></i></a>';
                                 })
-                                ->rawColumns(['measurement', 'address', 'description', 'amount', 'image', 'created_by', 'action'])
+                                ->rawColumns(['branch_name', 'measurement', 'address', 'description', 'image', 'created_by', 'action'])
                                 ->toJson();
         }
     }
@@ -96,15 +101,15 @@ class CustomerController extends Controller
                     "customer_branch" => "required|numeric",
                     "customer_name"   => "required|string|max:100",
                     "customer_email"  => "required|email|unique:customers,email|max:100",
+                    'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
                     "customer_phone_number" => "required|numeric",
-                    "opening_amount"  => "required|numeric",
                 ]);
             }else{
                 $validator = Validator::make($request->all(), [
                     "customer_name"   => "required|string|max:100",
                     "customer_email"  => "required|email|unique:customers,email|max:100",
+                    'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
                     "customer_phone_number" => "required|numeric",
-                    "opening_amount"  => "required|numeric",
                 ]);
             }
 
@@ -122,18 +127,10 @@ class CustomerController extends Controller
             }
             $customer->name          = $request->input("customer_name");
             $customer->email         = $request->input("customer_email");
-            $customer->phone_number  = $request->input("phone_number");
+            $customer->phone_number  = $request->input("customer_phone_number");
             $customer->amount        = $request->input("opening_amount");
-            if($request->hasFile('photo')){
-                $validator = Validator::make($request->all(), [
-                    'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
-                ]);
-
-                if($validator->fails())
-                {
-                    return redirect()->back()->with("error", $validator->errors()->first());
-                }
-
+            if($request->hasFile('photo'))
+            {
                 $filenameWithExt = $request->file('photo')->getClientOriginalName();
                 $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
                 $extension       = $request->file('photo')->getClientOriginalExtension();
@@ -161,9 +158,71 @@ class CustomerController extends Controller
     {
         if(Auth::user()->can('Edit Branch'))
         {
-            return view('customers.create', compact('branches', 'customer'));
+            $branches = Branch::pluck('name', 'id');
+            return view('customers.edit', compact('branches', 'customer'));
         }else{
             return redirect()->back()->with('error', __('Permission Denied.'));
+        }
+    }
+
+    public function update(Customer $customer, Request $request)
+    {
+        if(Auth::user()->can('Edit Customer'))
+        {
+            if(Auth::user()->isAdmin() && Auth::user()->parent_id === 0)
+            {
+                $validator = Validator::make($request->all(), [
+                    "customer_branch" => "required|numeric",
+                    "customer_name"   => "required|string|max:100",
+                    "customer_email"  => "required|email|unique:customers,email,". $customer->id ."id|max:100",
+                    'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
+                    "customer_phone_number" => "required|numeric",
+                ]);
+            }else{
+                $validator = Validator::make($request->all(), [
+                    "customer_name"   => "required|string|max:100",
+                    "customer_email"  => "required|email|unique:customers,email,". $customer->id ."id|max:100",
+                    'photo' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20480',
+                    "customer_phone_number" => "required|numeric"
+                ]);
+            }
+
+            if($validator->fails())
+            {
+                return redirect()->back()->with("error", $validator->errors()->first());
+            }
+
+            if(Auth::user()->isAdmin() && Auth::user()->parent_id === 0)
+            {
+                $customer->branch_id = $request->input("customer_branch");
+            }else{
+                $customer->branch_id = Auth::user()->branch_id;
+            }
+            $customer->name          = $request->input("customer_name");
+            $customer->email         = $request->input("customer_email");
+            $customer->phone_number  = $request->input("customer_phone_number");
+            $customer->amount        = $request->input("opening_amount");
+            if($request->hasFile('photo'))
+            {
+                if(asset(Storage::exists($customer->imgae)))
+                {
+                    asset(Storage::delete($customer->imgae));
+                }
+
+                $filenameWithExt = $request->file('photo')->getClientOriginalName();
+                $filename        = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+                $extension       = $request->file('photo')->getClientOriginalExtension();
+                $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+                $filepath        = $request->file('photo')->storeAs('customers', $fileNameToStore);
+                $customer->imgae  = $filepath;
+            }
+            $customer->address        = $request->input("customer_address");
+            $customer->description    = $request->input("customer_description");
+            $customer->created_by     = Auth::user()->CreatedBy();
+            $customer->save();
+            return redirect()->route("customers.index")->with("success", __("Customer updated successfully."));
+        }else{
+            return redirect()->back()->with("error", __("Permission Denied."));
         }
     }
 

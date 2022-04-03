@@ -24,13 +24,13 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h4><a href="{{ route("customers.index") }}" class="fa fa-arrow-circle-left me-2" title="{{ __('Create Service') }}"></a>{{ __('Create Service') }}</h4>
+                <h4><a href="{{ route("customers.index") }}" class="fa fa-arrow-circle-left me-2" title="{{ __('Create Customer') }}"></a>{{ __('Create Customer') }}</h4>
                 <div class="dropdown morphing scale-left">
                     <a href="javascript:void(0);" class="card-fullscreen" data-bs-toggle="tooltip" title="{{ __("Full Screen") }}"><i class="icon-size-fullscreen"></i></a>
                 </div>
             </div>
             <div class="card-body">
-                {!! Form::open(["route" => ["customers.store"], "method" => "POST", "id" => "submit-form"]) !!}
+                {!! Form::open(["route" => ["customers.store"], "method" => "POST", "id" => "submit-form", "enctype" => "multipart/form-data"]) !!}
                 @if(Auth::user()->parent_id === 0 && Auth::user()->isAdmin())
                     <div class="row mb-4">
                         <label class="col-xl-2 col-sm-3 col-form-label">{{ __('Customer Branch') }} *</label>
@@ -55,14 +55,6 @@
                     <label class="col-xl-2 col-sm-3 col-form-label">{{ __('Phone Number') }} *</label>
                     <div class="col-xl-8 col-sm-9">
                         {!! Form::number('customer_phone_number', null, ["class" => "form-control form-control-lg", "placeholder" => __('Phone Number')]) !!}
-                    </div>
-                </div>
-                <div class="row mb-4">
-                    <label class="col-xl-2 col-sm-3 col-form-label">{{ __('Opening Amount') }} *</label>
-                    <div class="col-xl-8 col-sm-9">
-                        {!! Form::number('opening_amount', null, ["class" => "form-control form-control-lg", "id" => "inputmask_currency", "inputmode" => "text", "placeholder" => __('Opening Amount')]) !!}
-                        <div class="form-text">{{ __("Currency Symbol") }}:
-                            <code>{{ Auth::user()->getDefaultCurrency() }}</code></div>
                     </div>
                 </div>
                 <div class="row mb-3">
