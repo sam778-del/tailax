@@ -16,19 +16,16 @@
 
 @section('page-content')
 <div class="col-12">
-    <div class="card-body border-bottom">
-        <div class="row align-items-center">
-            {{-- Other Widget --}}
-            <div class="col ml-n2">
-            </div>
-            {{-- End of other widget --}}
+    <div class="row-title  card-body border-bottom">
+        <div class="col col-3">
+            {!! Form::select('status', [2 => __("All Status"), 1 => __("Active"), 0 => __("Inactive")], null, ["class" => "form-select", "id" => "searchStatus"]) !!}
+        </div>
+        <div class="btn-group" role="group">
             @can('Create Service')
-                <div class="col-auto d-none d-md-inline-block">
-                    <a href="{{ route("services.create") }}" class="btn btn-primary">
-                        <i class="bi bi-plus-lg"></i>
-                        {{ __('Create Service') }}
-                    </a>
-                </div>
+                <a href="{{ route("services.create") }}" class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i>
+                    {{ __('Create Service') }}
+                </a>
             @endcan
         </div>
     </div>
@@ -64,7 +61,12 @@
             ordering: false,
             processing: true,
             serverSide: true,
-            ajax: '{{ route('services.datatables') }}',
+            ajax: {
+                url: '{{ route('services.datatables') }}',
+                data: function(d) {
+                    d.status = $('#searchStatus').val()
+                }
+            },
             columns: [
                 { data: 'code', code: 'code' },
                 { data: 'image', image: 'image' },
@@ -81,6 +83,47 @@
             },
         });
     });
+
+    $("#searchStatus").change(function() {
+        var oTable = $('#table_list').dataTable();
+        oTable.fnDraw(false);
+    });
+
+    function makeDefault(url)
+    {
+        Swal.fire({
+            title: '{{ __("Do you want to save the changes?") }}',
+            showDenyButton: true,
+            showCancelButton: false,
+            confirmButtonText: '{{ __("Continue") }}',
+            denyButtonText: `{{ __("Cancel") }}`,
+        }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    method: "PATCH",
+                    data: {
+                        _token: "{!! csrf_token() !!}"
+                    },
+                    success: function(data) {
+                        var oTable = $('#table_list').dataTable();
+                        oTable.fnDraw(false);
+                        if(data.status == true){
+                            toastr.success("{{__('Success') }}", data.msg, 'success');
+                        }else{
+                            toastr.error("{{__('Error') }}", data.msg, 'error');
+                        }
+                    },
+                    error: function(error) {
+                        Swal.fire('{{ __("Action Cannot be completed") }}', '', 'error')
+                    }
+                });
+            } else if (result.isDenied) {
+                Swal.fire('{{ __("Changes Cancelled") }}', '', 'info')
+            }
+        })
+    }
 
     function deleteAction(url)
     {

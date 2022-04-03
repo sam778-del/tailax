@@ -17,23 +17,26 @@ class BranchController extends Controller
         $this->middleware('auth');
     }
 
-    public function datatables()
+    public function datatables(Request $request)
     {
-        if(! auth()->user()->isAdmin() && auth()->user()->isUser())
+        if($request->ajax())
         {
-            $branches = Branch::where('created_by', '=', Auth::user()->CreatedBy())->orderBy('id', 'DESC')->get();
-        }else{
-            $branches = Branch::orderBy('id', 'DESC')->get();
+            if(! auth()->user()->isAdmin() && auth()->user()->isUser())
+            {
+                $branches = Branch::where('created_by', '=', Auth::user()->CreatedBy())->orderBy('id', 'DESC')->get();
+            }else{
+                $branches = Branch::orderBy('id', 'DESC')->get();
+            }
+            return Datatables::of($branches)
+                                ->editColumn('created_by', function(Branch $branch) {
+                                    return $branch->user->name;
+                                })
+                                ->addColumn('action', function(Branch $data) {
+                                    return '<a href=" '.route('branches.edit', $data->id).' " class="btn btn-link btn-sm color-400"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0);" onclick="deleteAction(&quot;' . route('branches.destroy', $data->id) . '&quot)" class="btn btn-link btn-sm color-400"><i class="fa fa-trash"></i></a>';
+                                })
+                                ->rawColumns(['created_by', 'action'])
+                                ->toJson();
         }
-        return Datatables::of($branches)
-                            ->addColumn('created_by', function(Branch $branch) {
-                                return $branch->user->name;
-                            })
-                            ->addColumn('action', function(Branch $data) {
-                                return '<a href=" '.route('branches.edit', $data->id).' " class="btn btn-link btn-sm color-400"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0);" onclick="deleteAction(&quot;' . route('branches.destroy', $data->id) . '&quot)" class="btn btn-link btn-sm color-400"><i class="fa fa-trash"></i></a>';
-                            })
-                            ->rawColumns(['created_by', 'action'])
-                            ->toJson();
     }
 
     public function index()

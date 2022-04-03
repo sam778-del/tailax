@@ -108,28 +108,7 @@
         var myForm = document.getElementById('submit-form');
         var formData = new FormData(myForm);
         $('button[type="submit"]').prop("disabled", true);
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: url,
-            method: "PATCH",
-            data: formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success: function(data) {
-                if(data.status === false){
-                    $('button[type="submit"]').prop("disabled", false);
-                    toastr.error("{{__('Error') }}", data.msg, 'error');
-                }else{
-                    toastr.success("{{__('Success') }}", data.msg, 'success');
-                    window.location.href = "{{ route("services.index") }}";
-                }
-            }
-        });
+        myForm.submit();
     });
 </script>
 @endpush

@@ -32,6 +32,9 @@ Route::get("/get-branches", [BranchController::class, "datatables"])
 
 // Service Area
 Route::resource('services', ServiceController::class)->middleware(["auth"]);
+Route::patch('/service-status/{service}', [ServiceController::class, 'changeServiceStatus'])
+        ->middleware('auth')
+        ->name('services.default');
 Route::get("/get-services", [ServiceController::class, "datatables"])
         ->middleware('auth')
         ->name('services.datatables');
@@ -44,3 +47,9 @@ Route::get('/get-currencies', [CurrencyController::class, "datatables"])
 Route::patch('/currency-status/{currency_id}', [CurrencyController::class, 'changeCurrencyStatus'])
         ->middleware('auth')
         ->name('currencies.default');
+
+// Customer Area
+Route::resource('customers', CustomerController::class)->middleware('auth');
+Route::get('get-customers', [CustomerController::class, 'datatables'])
+        ->middleware('auth')
+        ->name('customers.default');

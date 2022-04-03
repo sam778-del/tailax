@@ -16,23 +16,26 @@ class CurrencyController extends Controller
         $this->middleware('auth');
     }
 
-    public function datatables()
+    public function datatables(Request $request)
     {
-        $currencies = Currency::orderBy('id', 'DESC')->get();
-        return Datatables::of($currencies)
-                            ->addColumn('exchange_rate', function(Currency $currency) {
-                                return '<p class="text-success text-center">'. number_format($currency->amount, 3) .'</p>';
-                            })
-                            ->addColumn('base_currency', function(Currency $currency) {
-                                $currency_status = $currency->is_default === 1 ? __("Yes") : __("No");
-                                $currency_badge  = $currency->is_default === 1 ? __("badge bg-success") : __("badge bg-danger");
-                                return '<p class="text-center"><span onclick="makeDefault(&quot;' . route('currencies.default', $currency->id) . '&quot)" class="'. $currency_badge .'">'. $currency_status .'</span></p>';
-                            })
-                            ->addColumn('action', function(Currency $data) {
-                                return '<a href=" '.route('currencies.edit', $data->id).' " class="btn btn-link btn-sm color-400"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0);" onclick="deleteAction(&quot;' . route('currencies.destroy', $data->id) . '&quot)" class="btn btn-link btn-sm color-400"><i class="fa fa-trash"></i></a>';
-                            })
-                            ->rawColumns(['exchange_rate', 'base_currency', 'action'])
-                            ->toJson();
+        if($request->ajax())
+        {
+            $currencies = Currency::orderBy('id', 'DESC')->get();
+            return Datatables::of($currencies)
+                                ->addColumn('exchange_rate', function(Currency $currency) {
+                                    return '<p class="text-success text-center">'. number_format($currency->amount, 3) .'</p>';
+                                })
+                                ->addColumn('base_currency', function(Currency $currency) {
+                                    $currency_status = $currency->is_default === 1 ? __("Yes") : __("No");
+                                    $currency_badge  = $currency->is_default === 1 ? __("badge bg-success") : __("badge bg-danger");
+                                    return '<p class="text-center"><span onclick="makeDefault(&quot;' . route('currencies.default', $currency->id) . '&quot)" class="'. $currency_badge .'">'. $currency_status .'</span></p>';
+                                })
+                                ->addColumn('action', function(Currency $data) {
+                                    return '<a href=" '.route('currencies.edit', $data->id).' " class="btn btn-link btn-sm color-400"><i class="fa fa-pencil"></i></a> <a href="javascript:void(0);" onclick="deleteAction(&quot;' . route('currencies.destroy', $data->id) . '&quot)" class="btn btn-link btn-sm color-400"><i class="fa fa-trash"></i></a>';
+                                })
+                                ->rawColumns(['exchange_rate', 'base_currency', 'action'])
+                                ->toJson();
+        }
     }
 
     public function index()
