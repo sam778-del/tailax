@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotificationsTable extends Migration
+class CreateProductionStagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class CreateNotificationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('notifications', function (Blueprint $table) {
+        Schema::create('production_stages', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->date('from')->nullable();
-            $table->date('to')->nullable();
-            $table->string('color', 30)->nullable();
-            $table->tinyInteger('status')->default('0');
-            $table->text('description')->nullable();
+            $table->string('process_name', 100)->nullable();
             $table->integer('created_by')->default('0');
             $table->timestamps();
         });
@@ -32,6 +28,6 @@ class CreateNotificationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('notifications');
+        Schema::dropIfExists('production_stages');
     }
 }

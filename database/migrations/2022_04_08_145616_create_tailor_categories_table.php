@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use App\Models\User;
 
-class CreateExpenseCategoriesTable extends Migration
+class CreateTailorCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +13,10 @@ class CreateExpenseCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('expense_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('tailor_categories', function (Blueprint $table) {
+            $table->id();
             $table->string('name', 100)->nullable();
-            $table->string('branch_id')->default("0");
-            $table->string('created_by')->default(User::SUPERADMIN);
+            $table->integer('created_by')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateExpenseCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('expense_categories');
+        Schema::dropIfExists('tailor_categories');
     }
 }

@@ -24,84 +24,111 @@
                 </a>
              </li>
 
-             @if(Gate::check('Manage Product') || Gate::check('Manage Category') || Gate::check('Manage Brand') || Gate::check('Manage Tax') || Gate::check('Manage Unit'))
+             @if(Gate::check('Manage Tailor Product') || Gate::check('Manage Production Stage') || Gate::check('Manage Fabric Size') || Gate::check('Manage Tailor Categories'))
                 <li class="collapsed">
-                    <a class="m-link nav-link {{ (Request::segment(1) == 'products' || Request::segment(1) == 'categories' || Request::segment(1) == 'brands' || Request::segment(1) == 'taxes'|| Request::segment(1) == 'units') ? 'active' : ''}}" data-bs-toggle="collapse" data-bs-target="#menu-products" href="#">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'tailor_products' || Request::segment(1) == 'production_stages' || Request::segment(1) == 'fabric_sizes' || Request::segment(1) == 'tailor_categories') ? 'active' : ''}}" data-bs-toggle="collapse" data-bs-target="#menu-tailor-products" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M2.95 0.4C3.04315 0.275804 3.16393 0.175001 3.30279 0.105573C3.44164 0.0361451 3.59475 0 3.75 0L12.25 0C12.4052 0 12.5584 0.0361451 12.6972 0.105573C12.8361 0.175001 12.9569 0.275804 13.05 0.4L15.9 4.53333C15.9649 4.61988 16 4.72515 16 4.83333V15C16 15.2652 15.8946 15.5196 15.7071 15.7071C15.5196 15.8946 15.2652 16 15 16H1C0.734783 16 0.48043 15.8946 0.292893 15.7071C0.105357 15.5196 0 15.2652 0 15V4.83333C0 4.72515 0.0350889 4.61988 0.1 4.53333L2.95 0.4ZM7.5 1H3.75L1.5 4.33333H7.5V1ZM8.5 1V4.33333H14.5L12.25 1H8.5ZM15 5.33333H1V15H15V5.33333Z" fill="black"/>
                             <rect x="6" y="7.11108" width="4.44444" height="6.22222" fill="black"/>
                             <path class="fill-secondary" d="M6 7.11108H10.4444V13.3333H6V7.11108Z" fill="black"/>
                         </svg>
-                        <span class="ms-2">{{ __('Products') }}</span>
+                        <span class="ms-2">{{ __('Tailor Products') }}</span>
                         <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                     </a>
 
                     <!-- Menu: Sub menu ul -->
-                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'products' || Request::segment(1) == 'categories' || Request::segment(1) == 'brands' || Request::segment(1) == 'taxes'|| Request::segment(1) == 'units') ? 'show' : ''}}" id="menu-products">
-                        @can('Manage Product')
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'tailor_products' || Request::segment(1) == 'production_stages' || Request::segment(1) == 'fabric_sizes' || Request::segment(1) == 'tailor_categories') ? 'show' : ''}}" id="menu-tailor-products">
+                        @can('Manage Tailor Product')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'products') ? 'active' : '' }}" href="auth-404.html">{{ __('Product') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'tailor_products') ? 'active' : '' }}" href="auth-404.html">{{ __('Product') }}</a>
                             </li>
                         @endcan
-                        @can('Manage Category')
+                        @can('Manage Production Stage')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'categories') ? 'active' : '' }}" href="auth-404.html">{{ __('Categories') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'production_stages') ? 'active' : '' }}" href="{{ route('production_stages.index') }}">{{ __('Production Stages') }}</a>
                             </li>
                         @endcan
-                        @can('Manage Tax')
+                        @can('Manage Fabric Size')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'taxes') ? 'active' : '' }}" href="auth-404.html">{{ __('Tax') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'fabric_sizes') ? 'active' : '' }}" href="{{ route('fabric_sizes.index')  }}">{{ __('Fabric Sizes') }}</a>
                             </li>
                         @endcan
-                        @can('Manage Brand')
+                        @can('Manage Tailor Categories')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'brands') ? 'active' : '' }}" href="auth-404.html">{{ __('Brand') }}</a>
-                            </li>
-                        @endcan
-                        @can('Manage Units')
-                            <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'units') ? 'active' : '' }}" href="auth-404.html">{{ __('Units') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'tailor_categories') ? 'active' : '' }}" href="auth-404.html">{{ __('Categories') }}</a>
                             </li>
                         @endcan
                     </ul>
                 </li>
             @endif
 
-            @if(Gate::check('Manage Service'))
-                <li>
-                    <a class="m-link {{ (Request::segment(1) == "services") ? 'active' : '' }}" href="{{ route('services.index') }}">
+            @if(Gate::check('Manage Tailoring Tools') || Gate::check('Manage Production Stage') || Gate::check('Manage Measurement Field'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-measurements" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"></path>
                             <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
                         </svg>
-                    <span class="ms-2">{{ __('Services') }}</span>
-                    </a>
-                </li>
-            @endif
-
-            @if(Gate::check('Manage Measurement') || Gate::check('Manage Measurement Field'))
-                <li class="collapsed">
-                    <a class="m-link nav-link {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-measurements" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12.7677C1 12.5962 1.06811 12.4318 1.18935 12.3106C1.31058 12.1893 1.47501 12.1212 1.64646 12.1212H14.5758C14.7472 12.1212 14.9116 12.1893 15.0329 12.3106C15.1541 12.4318 15.2222 12.5962 15.2222 12.7677C15.2222 12.9391 15.1541 13.1036 15.0329 13.2248C14.9116 13.346 14.7472 13.4141 14.5758 13.4141H1.64646C1.47501 13.4141 1.31058 13.346 1.18935 13.2248C1.06811 13.1036 1 12.9391 1 12.7677ZM1 2.42424C1 2.25278 1.06811 2.08835 1.18935 1.96712C1.31058 1.84588 1.47501 1.77777 1.64646 1.77777H14.5758C14.7472 1.77777 14.9116 1.84588 15.0329 1.96712C15.1541 2.08835 15.2222 2.25278 15.2222 2.42424C15.2222 2.59569 15.1541 2.76012 15.0329 2.88136C14.9116 3.00259 14.7472 3.0707 14.5758 3.0707H1.64646C1.47501 3.0707 1.31058 3.00259 1.18935 2.88136C1.06811 2.76012 1 2.59569 1 2.42424Z" fill="black"/>
-                            <path class="fill-secondary" d="M1.18935 6.99517C1.06811 7.11641 1 7.28084 1 7.45229C1 7.62375 1.06811 7.78818 1.18935 7.90941C1.31058 8.03065 1.47501 8.09876 1.64646 8.09876H14.5758C14.7472 8.09876 14.9116 8.03065 15.0329 7.90941C15.1541 7.78818 15.2222 7.62375 15.2222 7.45229C15.2222 7.28084 15.1541 7.11641 15.0329 6.99517C14.9116 6.87394 14.7472 6.80583 14.5758 6.80583H1.64646C1.47501 6.80583 1.31058 6.87394 1.18935 6.99517Z" fill="black"/>
-                        </svg>
-                        <span class="ms-2">{{ __('Measurements') }}</span>
+                        <span class="ms-2">{{ __('Tailoring Tools') }}</span>
                         <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                     </a>
 
                     <!-- Menu: Sub menu ul -->
                     <ul class="sub-menu collapse {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'show' : '' }}" id="menu-measurements">
-                        @can('Manage Measurement')
-                            <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'measurements') ? 'active' : '' }}" href="auth-404.html">{{ __('Measurements') }}</a>
-                            </li>
-                        @endcan
                         @can('Manage Measurement Field')
                             <li>
                                 <a class="ms-link {{ (Request::segment(1) == 'measurements_field') ? 'active' : '' }}" href="auth-404.html">{{ __('Measurement Field') }}</a>
                             </li>
                         @endcan
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Production Stages') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Sizes') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Tailoring Category') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Tailoring Collection') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Production Capacity') }}</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Payment') || Gate::check('Manage Currency'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-inventory" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path class="fill-secondary" d="M5 10.5C5 10.3674 5.05268 10.2402 5.14645 10.1464C5.24021 10.0527 5.36739 10 5.5 10H7.5C7.63261 10 7.75979 10.0527 7.85355 10.1464C7.94732 10.2402 8 10.3674 8 10.5C8 10.6326 7.94732 10.7598 7.85355 10.8536C7.75979 10.9473 7.63261 11 7.5 11H5.5C5.36739 11 5.24021 10.9473 5.14645 10.8536C5.05268 10.7598 5 10.6326 5 10.5ZM5 8.5C5 8.36739 5.05268 8.24021 5.14645 8.14645C5.24021 8.05268 5.36739 8 5.5 8H10.5C10.6326 8 10.7598 8.05268 10.8536 8.14645C10.9473 8.24021 11 8.36739 11 8.5C11 8.63261 10.9473 8.75979 10.8536 8.85355C10.7598 8.94732 10.6326 9 10.5 9H5.5C5.36739 9 5.24021 8.94732 5.14645 8.85355C5.05268 8.75979 5 8.63261 5 8.5ZM5 6.5C5 6.36739 5.05268 6.24021 5.14645 6.14645C5.24021 6.05268 5.36739 6 5.5 6H10.5C10.6326 6 10.7598 6.05268 10.8536 6.14645C10.9473 6.24021 11 6.36739 11 6.5C11 6.63261 10.9473 6.75979 10.8536 6.85355C10.7598 6.94732 10.6326 7 10.5 7H5.5C5.36739 7 5.24021 6.94732 5.14645 6.85355C5.05268 6.75979 5 6.63261 5 6.5ZM5 4.5C5 4.36739 5.05268 4.24021 5.14645 4.14645C5.24021 4.05268 5.36739 4 5.5 4H10.5C10.6326 4 10.7598 4.05268 10.8536 4.14645C10.9473 4.24021 11 4.36739 11 4.5C11 4.63261 10.9473 4.75979 10.8536 4.85355C10.7598 4.94732 10.6326 5 10.5 5H5.5C5.36739 5 5.24021 4.94732 5.14645 4.85355C5.05268 4.75979 5 4.63261 5 4.5Z"></path>
+                            <path d="M3 0H13C13.5304 0 14.0391 0.210714 14.4142 0.585786C14.7893 0.960859 15 1.46957 15 2V14C15 14.5304 14.7893 15.0391 14.4142 15.4142C14.0391 15.7893 13.5304 16 13 16H3C2.46957 16 1.96086 15.7893 1.58579 15.4142C1.21071 15.0391 1 14.5304 1 14V13H2V14C2 14.2652 2.10536 14.5196 2.29289 14.7071C2.48043 14.8946 2.73478 15 3 15H13C13.2652 15 13.5196 14.8946 13.7071 14.7071C13.8946 14.5196 14 14.2652 14 14V2C14 1.73478 13.8946 1.48043 13.7071 1.29289C13.5196 1.10536 13.2652 1 13 1H3C2.73478 1 2.48043 1.10536 2.29289 1.29289C2.10536 1.48043 2 1.73478 2 2V3H1V2C1 1.46957 1.21071 0.960859 1.58579 0.585786C1.96086 0.210714 2.46957 0 3 0V0Z"></path>
+                            <path class="fill-secondary" d="M1 5V4.5C1 4.36739 1.05268 4.24021 1.14645 4.14645C1.24021 4.05268 1.36739 4 1.5 4C1.63261 4 1.75979 4.05268 1.85355 4.14645C1.94732 4.24021 2 4.36739 2 4.5V5H2.5C2.63261 5 2.75979 5.05268 2.85355 5.14645C2.94732 5.24021 3 5.36739 3 5.5C3 5.63261 2.94732 5.75979 2.85355 5.85355C2.75979 5.94732 2.63261 6 2.5 6H0.5C0.367392 6 0.240215 5.94732 0.146447 5.85355C0.0526784 5.75979 0 5.63261 0 5.5C0 5.36739 0.0526784 5.24021 0.146447 5.14645C0.240215 5.05268 0.367392 5 0.5 5H1ZM1 8V7.5C1 7.36739 1.05268 7.24021 1.14645 7.14645C1.24021 7.05268 1.36739 7 1.5 7C1.63261 7 1.75979 7.05268 1.85355 7.14645C1.94732 7.24021 2 7.36739 2 7.5V8H2.5C2.63261 8 2.75979 8.05268 2.85355 8.14645C2.94732 8.24021 3 8.36739 3 8.5C3 8.63261 2.94732 8.75979 2.85355 8.85355C2.75979 8.94732 2.63261 9 2.5 9H0.5C0.367392 9 0.240215 8.94732 0.146447 8.85355C0.0526784 8.75979 0 8.63261 0 8.5C0 8.36739 0.0526784 8.24021 0.146447 8.14645C0.240215 8.05268 0.367392 8 0.5 8H1ZM1 11V10.5C1 10.3674 1.05268 10.2402 1.14645 10.1464C1.24021 10.0527 1.36739 10 1.5 10C1.63261 10 1.75979 10.0527 1.85355 10.1464C1.94732 10.2402 2 10.3674 2 10.5V11H2.5C2.63261 11 2.75979 11.0527 2.85355 11.1464C2.94732 11.2402 3 11.3674 3 11.5C3 11.6326 2.94732 11.7598 2.85355 11.8536C2.75979 11.9473 2.63261 12 2.5 12H0.5C0.367392 12 0.240215 11.9473 0.146447 11.8536C0.0526784 11.7598 0 11.6326 0 11.5C0 11.3674 0.0526784 11.2402 0.146447 11.1464C0.240215 11.0527 0.367392 11 0.5 11H1Z"></path>
+                            <path class="fill-secondary" d="M14 4V3.80938C14 3.6125 13.9219 3.42188 13.7812 3.28125L10.7219 0.21875C10.5813 0.078125 10.3906 0 10.1906 0H10V4H14Z"></path>
+                        </svg>
+                        <span class="ms-2">{{ __('Inventory') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'currencies') ? 'show' : '' }}" id="menu-inventory">
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Products') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Suppliers') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Purchase Order') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Purchase Invoice') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Product Upload') }}</a>
+                        </li>
                     </ul>
                 </li>
             @endif
@@ -146,35 +173,63 @@
                 </li>
             @endif
 
-            @if(Gate::check('Manage Contact'))
-                <li>
-                    <a class="m-link {{ (Request::segment(1) == "contacts") ? 'active' : '' }}" href="{{ url('/') }}">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M7.99997 1C5.785 1 4.51323 1.52678 3.57555 2.46447C2.63787 3.40215 2.11108 4.67392 2.11108 6V7H3.11108C3.3763 7 3.63065 7.10536 3.81819 7.29289C4.00573 7.48043 4.11108 7.73478 4.11108 8V11C4.11108 11.2652 4.00573 11.5196 3.81819 11.7071C3.63065 11.8946 3.3763 12 3.11108 12H2.11108C1.84587 12 1.59151 11.8946 1.40398 11.7071C1.21644 11.5196 1.11108 11.2652 1.11108 11V6C1.11108 5.21207 1.26628 4.43185 1.56781 3.7039C1.86933 2.97595 2.31129 2.31451 2.86844 1.75736C3.4256 1.20021 4.08703 0.758251 4.81498 0.456723C5.54294 0.155195 6.32315 0 7.99997 0C9.67679 0 10.457 0.155195 11.185 0.456723C11.9129 0.758251 12.5744 1.20021 13.1315 1.75736C13.6887 2.31451 14.1306 2.97595 14.4321 3.7039C14.7337 4.43185 14.8889 5.21207 14.8889 6V12C14.8889 12.663 14.6255 13.2989 14.1566 13.7678C13.6878 14.2366 13.0519 14.5 12.3889 14.5H10.2549C10.1671 14.652 10.0409 14.7783 9.88885 14.866C9.73683 14.9538 9.56439 15 9.38886 15H8.38886C8.12365 15 7.86929 14.8946 7.68176 14.7071C7.49422 14.5196 7.38886 14.2652 7.38886 14C7.38886 13.7348 7.49422 13.4804 7.68176 13.2929C7.86929 13.1054 8.12365 13 8.38886 13H9.38886C9.56439 13 9.73683 13.0462 9.88885 13.134C10.0409 13.2217 10.1671 13.348 10.2549 13.5H12.3889C12.7867 13.5 13.1682 13.342 13.4495 13.0607C13.7308 12.7794 13.8889 12.3978 13.8889 12H12.8889C12.6236 12 12.3693 11.8946 12.1818 11.7071C11.9942 11.5196 11.8889 11.2652 11.8889 11V8C11.8889 7.73478 11.9942 7.48043 12.1818 7.29289C12.3693 7.10536 12.6236 7 12.8889 7H13.8889V6C13.8889 5.34339 13.7595 4.69321 13.5083 4.08658C13.257 3.47995 12.8887 2.92876 12.4244 2.46447C11.9601 2.00017 11.4089 1.63188 10.8023 1.3806C10.1957 1.12933 8.65658 1 7.99997 1Z"/>
-                            <path class="fill-secondary" d="M5.7777 11.5555C5.7777 11.5555 5.33325 11.5555 5.33325 11.1407C5.33325 10.7259 5.7777 9.48146 7.99992 9.48146C10.2221 9.48146 10.6666 10.7259 10.6666 11.1407C10.6666 11.5555 10.2221 11.5555 10.2221 11.5555H5.7777ZM7.99992 9.06665C8.35354 9.06665 8.69268 8.93554 8.94273 8.70216C9.19278 8.46878 9.33325 8.15225 9.33325 7.8222C9.33325 7.49215 9.19278 7.17563 8.94273 6.94225C8.69268 6.70887 8.35354 6.57776 7.99992 6.57776C7.6463 6.57776 7.30716 6.70887 7.05711 6.94225C6.80706 7.17563 6.66659 7.49215 6.66659 7.8222C6.66659 8.15225 6.80706 8.46878 7.05711 8.70216C7.30716 8.93554 7.6463 9.06665 7.99992 9.06665Z"/>
-                            <path class="fill-secondary" d="M6.28723 5.68738C6.24555 5.64848 6.22214 5.59573 6.22214 5.54072C6.22214 5.48571 6.24555 5.43296 6.28723 5.39406C6.3289 5.35516 6.38543 5.33331 6.44436 5.33331H9.55547C9.61441 5.33331 9.67093 5.35516 9.71261 5.39406C9.75428 5.43296 9.7777 5.48571 9.7777 5.54072C9.7777 5.59573 9.75428 5.64848 9.71261 5.68738C9.67093 5.72628 9.61441 5.74813 9.55547 5.74813H6.44436C6.38543 5.74813 6.3289 5.72628 6.28723 5.68738Z"/>
-                        </svg>
-                    <span class="ms-2">{{ __('Contacts') }}</span>
-                    </a>
-                </li>
-            @endif
-
-            @if(Gate::check('Manage Payment') || Gate::check('Manage Currency'))
+            @if(Gate::check('Manage Expense') || Gate::check('Manage Expense Category'))
                 <li class="collapsed">
-                    <a class="m-link nav-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-payment" href="#">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-sales" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
-                            <path d="M14 3C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V12C15 12.2652 14.8946 12.5196 14.7071 12.7071C14.5196 12.8946 14.2652 13 14 13H2C1.73478 13 1.48043 12.8946 1.29289 12.7071C1.10536 12.5196 1 12.2652 1 12V4C1 3.73478 1.10536 3.48043 1.29289 3.29289C1.48043 3.10536 1.73478 3 2 3H14ZM2 2C1.46957 2 0.960859 2.21071 0.585786 2.58579C0.210714 2.96086 0 3.46957 0 4L0 12C0 12.5304 0.210714 13.0391 0.585786 13.4142C0.960859 13.7893 1.46957 14 2 14H14C14.5304 14 15.0391 13.7893 15.4142 13.4142C15.7893 13.0391 16 12.5304 16 12V4C16 3.46957 15.7893 2.96086 15.4142 2.58579C15.0391 2.21071 14.5304 2 14 2H2Z"/>
-                            <path class="fill-secondary" d="M2 5.5C2 5.36739 2.05268 5.24021 2.14645 5.14645C2.24021 5.05268 2.36739 5 2.5 5H4.5C4.63261 5 4.75979 5.05268 4.85355 5.14645C4.94732 5.24021 5 5.36739 5 5.5V6.5C5 6.63261 4.94732 6.75979 4.85355 6.85355C4.75979 6.94732 4.63261 7 4.5 7H2.5C2.36739 7 2.24021 6.94732 2.14645 6.85355C2.05268 6.75979 2 6.63261 2 6.5V5.5ZM2 8.5C2 8.36739 2.05268 8.24021 2.14645 8.14645C2.24021 8.05268 2.36739 8 2.5 8H7.5C7.63261 8 7.75979 8.05268 7.85355 8.14645C7.94732 8.24021 8 8.36739 8 8.5C8 8.63261 7.94732 8.75979 7.85355 8.85355C7.75979 8.94732 7.63261 9 7.5 9H2.5C2.36739 9 2.24021 8.94732 2.14645 8.85355C2.05268 8.75979 2 8.63261 2 8.5ZM2 10.5C2 10.3674 2.05268 10.2402 2.14645 10.1464C2.24021 10.0527 2.36739 10 2.5 10H3.5C3.63261 10 3.75979 10.0527 3.85355 10.1464C3.94732 10.2402 4 10.3674 4 10.5C4 10.6326 3.94732 10.7598 3.85355 10.8536C3.75979 10.9473 3.63261 11 3.5 11H2.5C2.36739 11 2.24021 10.9473 2.14645 10.8536C2.05268 10.7598 2 10.6326 2 10.5ZM5 10.5C5 10.3674 5.05268 10.2402 5.14645 10.1464C5.24021 10.0527 5.36739 10 5.5 10H6.5C6.63261 10 6.75979 10.0527 6.85355 10.1464C6.94732 10.2402 7 10.3674 7 10.5C7 10.6326 6.94732 10.7598 6.85355 10.8536C6.75979 10.9473 6.63261 11 6.5 11H5.5C5.36739 11 5.24021 10.9473 5.14645 10.8536C5.05268 10.7598 5 10.6326 5 10.5ZM8 10.5C8 10.3674 8.05268 10.2402 8.14645 10.1464C8.24021 10.0527 8.36739 10 8.5 10H9.5C9.63261 10 9.75979 10.0527 9.85355 10.1464C9.94732 10.2402 10 10.3674 10 10.5C10 10.6326 9.94732 10.7598 9.85355 10.8536C9.75979 10.9473 9.63261 11 9.5 11H8.5C8.36739 11 8.24021 10.9473 8.14645 10.8536C8.05268 10.7598 8 10.6326 8 10.5ZM11 10.5C11 10.3674 11.0527 10.2402 11.1464 10.1464C11.2402 10.0527 11.3674 10 11.5 10H12.5C12.6326 10 12.7598 10.0527 12.8536 10.1464C12.9473 10.2402 13 10.3674 13 10.5C13 10.6326 12.9473 10.7598 12.8536 10.8536C12.7598 10.9473 12.6326 11 12.5 11H11.5C11.3674 11 11.2402 10.9473 11.1464 10.8536C11.0527 10.7598 11 10.6326 11 10.5Z"/>
+                            <path class="fill-secondary" d="M4 10C4 9.73478 4.10536 9.48043 4.29289 9.29289C4.48043 9.10536 4.73478 9 5 9C5.26522 9 5.51957 9.10536 5.70711 9.29289C5.89464 9.48043 6 9.73478 6 10V12C6 12.2652 5.89464 12.5196 5.70711 12.7071C5.51957 12.8946 5.26522 13 5 13C4.73478 13 4.48043 12.8946 4.29289 12.7071C4.10536 12.5196 4 12.2652 4 12V10ZM7 10C7 9.73478 7.10536 9.48043 7.29289 9.29289C7.48043 9.10536 7.73478 9 8 9C8.26522 9 8.51957 9.10536 8.70711 9.29289C8.89464 9.48043 9 9.73478 9 10V12C9 12.2652 8.89464 12.5196 8.70711 12.7071C8.51957 12.8946 8.26522 13 8 13C7.73478 13 7.48043 12.8946 7.29289 12.7071C7.10536 12.5196 7 12.2652 7 12V10ZM10 10C10 9.73478 10.1054 9.48043 10.2929 9.29289C10.4804 9.10536 10.7348 9 11 9C11.2652 9 11.5196 9.10536 11.7071 9.29289C11.8946 9.48043 12 9.73478 12 10V12C12 12.2652 11.8946 12.5196 11.7071 12.7071C11.5196 12.8946 11.2652 13 11 13C10.7348 13 10.4804 12.8946 10.2929 12.7071C10.1054 12.5196 10 12.2652 10 12V10Z" fill="black"/>
+                            <path d="M5.757 1.071C5.81335 1.10474 5.86249 1.14925 5.90163 1.20199C5.94077 1.25473 5.96914 1.31467 5.98511 1.37837C6.00108 1.44207 6.00435 1.5083 5.99472 1.57327C5.98509 1.63823 5.96276 1.70067 5.929 1.757L3.383 6H12.617L10.07 1.757C10.0018 1.64322 9.98167 1.50703 10.0139 1.37838C10.0462 1.24973 10.1282 1.13916 10.242 1.071C10.3558 1.00284 10.492 0.98267 10.6206 1.01493C10.7493 1.04718 10.8598 1.12922 10.928 1.243L13.783 6H15.5C15.6326 6 15.7598 6.05268 15.8536 6.14645C15.9473 6.24022 16 6.36739 16 6.5V7.5C16 7.63261 15.9473 7.75979 15.8536 7.85356C15.7598 7.94732 15.6326 8 15.5 8H14.877L13.033 14.456C12.9882 14.6129 12.8935 14.7508 12.7632 14.849C12.6329 14.9472 12.4741 15.0002 12.311 15H3.69C3.52687 15.0002 3.36812 14.9472 3.23783 14.849C3.10754 14.7508 3.01281 14.6129 2.968 14.456L1.123 8H0.5C0.367392 8 0.240215 7.94732 0.146447 7.85356C0.0526784 7.75979 0 7.63261 0 7.5V6.5C0 6.36739 0.0526784 6.24022 0.146447 6.14645C0.240215 6.05268 0.367392 6 0.5 6H2.217L5.07 1.243C5.10374 1.18666 5.14825 1.13751 5.20099 1.09837C5.25373 1.05923 5.31366 1.03086 5.37737 1.01489C5.44107 0.998917 5.5073 0.995652 5.57227 1.00528C5.63723 1.01491 5.69967 1.03724 5.756 1.071H5.757ZM2.163 8L3.877 14H12.123L13.837 8H2.163Z" fill="black"/>
                         </svg>
-                        <span class="ms-2">{{ __('Payments') }}</span>
+                        <span class="ms-2">{{ __('Sales') }}</span>
                         <span class="arrow fa fa-angle-right ms-auto text-end"></span>
                     </a>
 
                     <!-- Menu: Sub menu ul -->
-                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'currencies') ? 'show' : '' }}" id="menu-payment">
-                        @can('Manage Currency')
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'show' : '' }}" id="menu-sales">
+                        @can('Manage Expense')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Currencies') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Invoices') }}</a>
+                            </li>
+                        @endcan
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Manufacturing Orders') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Scheduled Promises') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Delivery Receipts') }}</a>
+                        </li>
+                        <li>
+                            <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Direct Delivery') }}</a>
+                        </li>
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Expense') || Gate::check('Manage Expense Category'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-expenses" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M15.4986 3L15.4586 3.87C15.7225 4.25355 15.8435 4.71745 15.8006 5.181L15.1636 12.181C15.1185 12.6779 14.8892 13.14 14.5208 13.4766C14.1525 13.8131 13.6716 13.9998 13.1726 14H6.99863V13H13.1726C13.4221 12.9998 13.6625 12.9063 13.8466 12.7379C14.0307 12.5696 14.1452 12.3385 14.1676 12.09L14.8046 5.09C14.8171 4.95165 14.8007 4.81221 14.7563 4.68058C14.7119 4.54894 14.6406 4.42799 14.5469 4.32544C14.4532 4.22289 14.3392 4.14099 14.212 4.08496C14.0849 4.02893 13.9475 3.99999 13.8086 4H2.18863C2.04972 3.99999 1.91232 4.02893 1.78521 4.08496C1.6581 4.14099 1.54406 4.22289 1.45035 4.32544C1.35664 4.42799 1.28533 4.54894 1.24096 4.68058C1.19659 4.81221 1.18013 4.95165 1.19263 5.09L1.45863 8H0.453629L0.19763 5.181C0.172486 4.9043 0.205268 4.6254 0.293886 4.36208C0.382505 4.09876 0.525016 3.85678 0.712335 3.65159C0.899653 3.4464 1.12767 3.28248 1.38185 3.17029C1.63603 3.05811 1.91079 3.00011 2.18863 3H6.17063C6.70102 2.99989 7.20964 2.7891 7.58463 2.414L8.41263 1.586C8.78762 1.2109 9.29624 1.00011 9.82663 1H13.4986C14.0291 1 14.5378 1.21071 14.9128 1.58579C15.2879 1.96086 15.4986 2.46957 15.4986 3V3ZM9.82663 2C9.56144 2.00006 9.30712 2.10545 9.11963 2.293L8.41263 3H13.8086C14.0486 3 14.2786 3.042 14.4916 3.12L14.4986 2.98C14.4934 2.71826 14.3857 2.46902 14.1988 2.28579C14.0118 2.10255 13.7604 1.99995 13.4986 2H9.82663V2Z"/>
+                            <path class="fill-secondary" d="M5 6H6V14H5V6Z"/>
+                            <path class="fill-secondary" d="M3 6H4V14H3V6Z"/>
+                            <path class="fill-secondary" d="M6 6H6.5C7.88071 6 9 7.11929 9 8.5C9 9.88071 7.88071 11 6.5 11H6V6Z"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Production') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'show' : '' }}" id="menu-expenses">
+                        @can('Manage Expense')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Expense') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Expense Category')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'expense_category') ? 'active' : '' }}" href="auth-404.html">{{ __('Category') }}</a>
                             </li>
                         @endcan
                     </ul>
@@ -192,6 +247,36 @@
                         </svg>
                     <span class="ms-2">{{ __('Branches') }}</span>
                     </a>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Expense') || Gate::check('Manage Expense Category'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-expenses" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M6 8C6.79565 8 7.55871 7.68393 8.12132 7.12132C8.68393 6.55871 9 5.79565 9 5C9 4.20435 8.68393 3.44129 8.12132 2.87868C7.55871 2.31607 6.79565 2 6 2C5.20435 2 4.44129 2.31607 3.87868 2.87868C3.31607 3.44129 3 4.20435 3 5C3 5.79565 3.31607 6.55871 3.87868 7.12132C4.44129 7.68393 5.20435 8 6 8ZM1 14C1 14 0 14 0 13C0 12 1 9 6 9C11 9 12 12 12 13C12 14 11 14 11 14H1Z" fill="black"/>
+                            <path class="fill-secondary" d="M11.1464 3.14645C11.0527 3.24021 11 3.36739 11 3.5C11 3.63261 11.0527 3.75979 11.1464 3.85355C11.2402 3.94732 11.3674 4 11.5 4H15.5C15.6326 4 15.7598 3.94732 15.8536 3.85355C15.9473 3.75979 16 3.63261 16 3.5C16 3.36739 15.9473 3.24021 15.8536 3.14645C15.7598 3.05268 15.6326 3 15.5 3H11.5C11.3674 3 11.2402 3.05268 11.1464 3.14645Z" fill="black"/>
+                            <path class="fill-secondary" d="M11.1464 6.14645C11.2402 6.05268 11.3674 6 11.5 6H15.5C15.6326 6 15.7598 6.05268 15.8536 6.14645C15.9473 6.24021 16 6.36739 16 6.5C16 6.63261 15.9473 6.75979 15.8536 6.85355C15.7598 6.94732 15.6326 7 15.5 7H11.5C11.3674 7 11.2402 6.94732 11.1464 6.85355C11.0527 6.75979 11 6.63261 11 6.5C11 6.36739 11.0527 6.24021 11.1464 6.14645Z" fill="black"/>
+                            <path class="fill-secondary" d="M13.1464 9.14645C13.2402 9.05268 13.3674 9 13.5 9H15.5C15.6326 9 15.7598 9.05268 15.8536 9.14645C15.9473 9.24021 16 9.36739 16 9.5C16 9.63261 15.9473 9.75979 15.8536 9.85355C15.7598 9.94732 15.6326 10 15.5 10H13.5C13.3674 10 13.2402 9.94732 13.1464 9.85355C13.0527 9.75979 13 9.63261 13 9.5C13 9.36739 13.0527 9.24021 13.1464 9.14645Z" fill="black"/>
+                            <path class="fill-secondary" d="M13.1464 12.1464C13.2402 12.0527 13.3674 12 13.5 12H15.5C15.6326 12 15.7598 12.0527 15.8536 12.1464C15.9473 12.2402 16 12.3674 16 12.5C16 12.6326 15.9473 12.7598 15.8536 12.8536C15.7598 12.9473 15.6326 13 15.5 13H13.5C13.3674 13 13.2402 12.9473 13.1464 12.8536C13.0527 12.7598 13 12.6326 13 12.5C13 12.3674 13.0527 12.2402 13.1464 12.1464Z" fill="black"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Human Resources') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'expenses' || Request::segment(1) == 'expense_category') ? 'show' : '' }}" id="menu-expenses">
+                        @can('Manage Expense')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'expenses') ? 'active' : '' }}" href="auth-404.html">{{ __('Expense') }}</a>
+                            </li>
+                        @endcan
+                        @can('Manage Expense Category')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'expense_category') ? 'active' : '' }}" href="auth-404.html">{{ __('Category') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
                 </li>
             @endif
 
@@ -221,6 +306,28 @@
                         @can('Manage Calendar')
                             <li>
                                 <a class="ms-link {{ (Request::segment(1) == 'calendars') ? 'active' : '' }}" href="auth-404.html">{{ __('Calendar') }}</a>
+                            </li>
+                        @endcan
+                    </ul>
+                </li>
+            @endif
+
+            @if(Gate::check('Manage Payment') || Gate::check('Manage Currency'))
+                <li class="collapsed">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-payment" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M14 3C14.2652 3 14.5196 3.10536 14.7071 3.29289C14.8946 3.48043 15 3.73478 15 4V12C15 12.2652 14.8946 12.5196 14.7071 12.7071C14.5196 12.8946 14.2652 13 14 13H2C1.73478 13 1.48043 12.8946 1.29289 12.7071C1.10536 12.5196 1 12.2652 1 12V4C1 3.73478 1.10536 3.48043 1.29289 3.29289C1.48043 3.10536 1.73478 3 2 3H14ZM2 2C1.46957 2 0.960859 2.21071 0.585786 2.58579C0.210714 2.96086 0 3.46957 0 4L0 12C0 12.5304 0.210714 13.0391 0.585786 13.4142C0.960859 13.7893 1.46957 14 2 14H14C14.5304 14 15.0391 13.7893 15.4142 13.4142C15.7893 13.0391 16 12.5304 16 12V4C16 3.46957 15.7893 2.96086 15.4142 2.58579C15.0391 2.21071 14.5304 2 14 2H2Z"/>
+                            <path class="fill-secondary" d="M2 5.5C2 5.36739 2.05268 5.24021 2.14645 5.14645C2.24021 5.05268 2.36739 5 2.5 5H4.5C4.63261 5 4.75979 5.05268 4.85355 5.14645C4.94732 5.24021 5 5.36739 5 5.5V6.5C5 6.63261 4.94732 6.75979 4.85355 6.85355C4.75979 6.94732 4.63261 7 4.5 7H2.5C2.36739 7 2.24021 6.94732 2.14645 6.85355C2.05268 6.75979 2 6.63261 2 6.5V5.5ZM2 8.5C2 8.36739 2.05268 8.24021 2.14645 8.14645C2.24021 8.05268 2.36739 8 2.5 8H7.5C7.63261 8 7.75979 8.05268 7.85355 8.14645C7.94732 8.24021 8 8.36739 8 8.5C8 8.63261 7.94732 8.75979 7.85355 8.85355C7.75979 8.94732 7.63261 9 7.5 9H2.5C2.36739 9 2.24021 8.94732 2.14645 8.85355C2.05268 8.75979 2 8.63261 2 8.5ZM2 10.5C2 10.3674 2.05268 10.2402 2.14645 10.1464C2.24021 10.0527 2.36739 10 2.5 10H3.5C3.63261 10 3.75979 10.0527 3.85355 10.1464C3.94732 10.2402 4 10.3674 4 10.5C4 10.6326 3.94732 10.7598 3.85355 10.8536C3.75979 10.9473 3.63261 11 3.5 11H2.5C2.36739 11 2.24021 10.9473 2.14645 10.8536C2.05268 10.7598 2 10.6326 2 10.5ZM5 10.5C5 10.3674 5.05268 10.2402 5.14645 10.1464C5.24021 10.0527 5.36739 10 5.5 10H6.5C6.63261 10 6.75979 10.0527 6.85355 10.1464C6.94732 10.2402 7 10.3674 7 10.5C7 10.6326 6.94732 10.7598 6.85355 10.8536C6.75979 10.9473 6.63261 11 6.5 11H5.5C5.36739 11 5.24021 10.9473 5.14645 10.8536C5.05268 10.7598 5 10.6326 5 10.5ZM8 10.5C8 10.3674 8.05268 10.2402 8.14645 10.1464C8.24021 10.0527 8.36739 10 8.5 10H9.5C9.63261 10 9.75979 10.0527 9.85355 10.1464C9.94732 10.2402 10 10.3674 10 10.5C10 10.6326 9.94732 10.7598 9.85355 10.8536C9.75979 10.9473 9.63261 11 9.5 11H8.5C8.36739 11 8.24021 10.9473 8.14645 10.8536C8.05268 10.7598 8 10.6326 8 10.5ZM11 10.5C11 10.3674 11.0527 10.2402 11.1464 10.1464C11.2402 10.0527 11.3674 10 11.5 10H12.5C12.6326 10 12.7598 10.0527 12.8536 10.1464C12.9473 10.2402 13 10.3674 13 10.5C13 10.6326 12.9473 10.7598 12.8536 10.8536C12.7598 10.9473 12.6326 11 12.5 11H11.5C11.3674 11 11.2402 10.9473 11.1464 10.8536C11.0527 10.7598 11 10.6326 11 10.5Z"/>
+                        </svg>
+                        <span class="ms-2">{{ __('Payments') }}</span>
+                        <span class="arrow fa fa-angle-right ms-auto text-end"></span>
+                    </a>
+
+                    <!-- Menu: Sub menu ul -->
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'currencies') ? 'show' : '' }}" id="menu-payment">
+                        @can('Manage Currency')
+                            <li>
+                                <a class="ms-link {{ (Request::segment(1) == 'currencies') ? 'active' : '' }}" href="{{ route("currencies.index") }}">{{ __('Currencies') }}</a>
                             </li>
                         @endcan
                     </ul>

@@ -23,7 +23,7 @@ class MeasurementController extends Controller
     {
         if(Auth::user()->can('Manage Measurement'))
         {
-
+            return view('measurement.index');
         }else{
             return redirect()->back()->with('error', __('Permsission Denied.'));
         }

@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ProductionStageController;
+use App\Http\Controllers\FabricSizeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,23 +23,11 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', [HomeController::class, 'index'])->name('home')->middleware(["auth"]);
 
-// Service Area
-Route::resource('services', ServiceController::class)->middleware(["auth"]);
-
 // Branch Area
 Route::resource('branches', BranchController::class)->middleware(['auth']);
 Route::get("/get-branches", [BranchController::class, "datatables"])
         ->middleware('auth')
         ->name("branches.datatables");
-
-// Service Area
-Route::resource('services', ServiceController::class)->middleware(["auth"]);
-Route::patch('/service-status/{service}', [ServiceController::class, 'changeServiceStatus'])
-        ->middleware('auth')
-        ->name('services.default');
-Route::get("/get-services", [ServiceController::class, "datatables"])
-        ->middleware('auth')
-        ->name('services.datatables');
 
 // Currency Area
 Route::resource('currencies', CurrencyController::class)->middleware('auth');
@@ -54,3 +43,15 @@ Route::resource('customers', CustomerController::class)->middleware('auth');
 Route::get('get-customers', [CustomerController::class, 'datatables'])
         ->middleware('auth')
         ->name('customers.datatables');
+
+// Production Stage Area
+Route::resource('production_stages', ProductionStageController::class)->middleware('auth');
+Route::get('get-production-stage', [ProductionStageController::class, 'datatables'])
+        ->middleware('auth')
+        ->name('production.stage.datatables');
+
+// Fabric Size Area
+Route::resource('fabric_sizes', FabricSizeController::class)->middleware('auth');
+Route::get('get-fabric-size', [FabricSizeController::class, 'datatables'])
+        ->middleware('auth')
+        ->name('fabric.size.datatables');

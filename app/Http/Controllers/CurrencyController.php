@@ -11,11 +11,23 @@ use App\Models\Currency;
 
 class CurrencyController extends Controller
 {
+    /**
+     * Method __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Method datatables
+     *
+     * @param Request $request [explicite description]
+     *
+     * @return void
+     */
     public function datatables(Request $request)
     {
         if($request->ajax())
@@ -38,6 +50,11 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Method index
+     *
+     * @return void
+     */
     public function index()
     {
         if(Auth::user()->can('Manage Currency'))
@@ -48,6 +65,11 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Method create
+     *
+     * @return void
+     */
     public function create()
     {
         if(Auth::user()->can('Create Currency'))
@@ -58,6 +80,13 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Method store
+     *
+     * @param Request $request [explicite description]
+     *
+     * @return void
+     */
     public function store(Request $request)
     {
         if(Auth::user()->can('Create Currency'))
@@ -84,6 +113,13 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Method edit
+     *
+     * @param Currency $currency [explicite description]
+     *
+     * @return void
+     */
     public function edit(Currency $currency)
     {
         if(Auth::user()->can('Edit Currency'))
@@ -94,6 +130,14 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Method update
+     *
+     * @param Request $request [explicite description]
+     * @param Currency $currency [explicite description]
+     *
+     * @return void
+     */
     public function update(Request $request, Currency $currency)
     {
         if(Auth::user()->can('Create Currency'))
@@ -120,7 +164,14 @@ class CurrencyController extends Controller
         }
     }
 
-    public function changeCurrencyStatus($currency_id)
+    /**
+     * Method changeCurrencyStatus
+     *
+     * @param int $currency_id [explicite description]
+     *
+     * @return void
+     */
+    public function changeCurrencyStatus(int $currency_id)
     {
         if(Auth::user()->can('Manage Currency'))
         {
@@ -134,6 +185,13 @@ class CurrencyController extends Controller
         }
     }
 
+    /**
+     * Method destroy
+     *
+     * @param Currency $currency [explicite description]
+     *
+     * @return void
+     */
     public function destroy(Currency $currency)
     {
         if(Auth::user()->can('Delete Currency'))

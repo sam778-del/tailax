@@ -12,11 +12,23 @@ use App\Models\User;
 
 class BranchController extends Controller
 {
+    /**
+     * Method __construct
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * Method datatables
+     *
+     * @param Request $request [explicite description]
+     *
+     * @return void
+     */
     public function datatables(Request $request)
     {
         if($request->ajax())
@@ -39,6 +51,11 @@ class BranchController extends Controller
         }
     }
 
+    /**
+     * Method index
+     *
+     * @return void
+     */
     public function index()
     {
         if(Auth::user()->can('Manage Branch'))
@@ -49,6 +66,11 @@ class BranchController extends Controller
         }
     }
 
+    /**
+     * Method create
+     *
+     * @return void
+     */
     public function create()
     {
         if(Auth::user()->can('Create Branch'))
@@ -59,6 +81,13 @@ class BranchController extends Controller
         }
     }
 
+    /**
+     * Method edit
+     *
+     * @param Branch $branch [explicite description]
+     *
+     * @return void
+     */
     public function edit(Branch $branch)
     {
         if(Auth::user()->can('Edit Branch'))
@@ -69,6 +98,13 @@ class BranchController extends Controller
         }
     }
 
+    /**
+     * Method store
+     *
+     * @param Request $request [explicite description]
+     *
+     * @return void
+     */
     public function store(Request $request)
     {
         if(Auth::user()->can('Create Branch'))
@@ -93,6 +129,14 @@ class BranchController extends Controller
         }
     }
 
+    /**
+     * Method update
+     *
+     * @param Request $request [explicite description]
+     * @param Branch $branch [explicite description]
+     *
+     * @return void
+     */
     public function update(Request $request, Branch $branch)
     {
         if(Auth::user()->can('Edit Branch'))
@@ -115,6 +159,13 @@ class BranchController extends Controller
         }
     }
 
+    /**
+     * Method destroy
+     *
+     * @param Branch $branch [explicite description]
+     *
+     * @return void
+     */
     public function destroy(Branch $branch)
     {
         if(Auth::user()->can('Delete Branch'))
