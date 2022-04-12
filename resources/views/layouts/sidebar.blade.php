@@ -55,7 +55,7 @@
                         @endcan
                         @can('Manage Tailor Categories')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'tailor_categories') ? 'active' : '' }}" href="auth-404.html">{{ __('Categories') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'tailor_categories') ? 'active' : '' }}" href="{{ route('tailor_categories.index') }}">{{ __('Categories') }}</a>
                             </li>
                         @endcan
                     </ul>

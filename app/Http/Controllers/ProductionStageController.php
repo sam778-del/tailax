@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\ProductionStage;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use Illuminate\SUpport\Facades\Validator;
+use Illuminate\Support\Facades\Validator;
 
 /**
  *

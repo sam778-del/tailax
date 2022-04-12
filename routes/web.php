@@ -7,6 +7,8 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductionStageController;
 use App\Http\Controllers\FabricSizeController;
+use App\Http\Controllers\TailorCategoryController;
+use App\Http\Controllers\TailorProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +57,15 @@ Route::resource('fabric_sizes', FabricSizeController::class)->middleware('auth')
 Route::get('get-fabric-size', [FabricSizeController::class, 'datatables'])
         ->middleware('auth')
         ->name('fabric.size.datatables');
+
+// Tailor Category Area
+Route::resource('tailor_categories', TailorCategoryController::class)->middleware('auth');
+Route::get('get-tailor-category', [TailorCategoryController::class, 'datatables'])
+        ->middleware('auth')
+        ->name('tailor.category.datatables');
+
+// Tailor Product Area
+Route::resource('tailor_products',TailorProductController::class)->middleware('auth');
+Route::get('get-tailor-product', [TailorProductController::::class, 'datatables'])
+        ->middleware('auth')
+        ->name('tailor.product.datatables');
