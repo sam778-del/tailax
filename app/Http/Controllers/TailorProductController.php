@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 use Illuminate\Support\Facades\Validator;
-use App\Models\Tailor\Product;
+use App\Models\TailorProduct;
 
 class TailorProductController extends Controller
 {
@@ -45,6 +45,17 @@ class TailorProductController extends Controller
                         })
                         ->rawColumns(['action'])
                         ->toJson();
+        }
+    }
+
+    public function index()
+    {
+        if(Auth::user()->can('Manage Tailor Product'))
+        {
+            $branches = $this->tailorProduct->branches();
+            return view('tailorproducts.index', compact('branches'));
+        }else{
+            return redirect()->back()->with('error', __('Permission Denied.'));
         }
     }
 }

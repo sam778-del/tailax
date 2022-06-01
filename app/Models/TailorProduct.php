@@ -3,11 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Branch;
 
+/**
+ *
+ */
 class TailorProduct extends Model
 {
+    /**
+     * @var string
+     */
     protected $table = 'tailor_products';
 
+    /**
+     * @var string[]
+     */
     protected  $fillable = [
         'garment_name',
         'description',
@@ -20,4 +30,12 @@ class TailorProduct extends Model
         'gallery',
         'fabric_consumption'
     ];
+
+    /**
+     * @return mixed
+     */
+    public function branches()
+    {
+        return Branch::pluck('name', 'id');
+    }
 }

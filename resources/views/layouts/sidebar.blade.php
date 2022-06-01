@@ -40,7 +40,7 @@
                     <ul class="sub-menu collapse {{ (Request::segment(1) == 'tailor_products' || Request::segment(1) == 'production_stages' || Request::segment(1) == 'fabric_sizes' || Request::segment(1) == 'tailor_categories') ? 'show' : ''}}" id="menu-tailor-products">
                         @can('Manage Tailor Product')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'tailor_products') ? 'active' : '' }}" href="auth-404.html">{{ __('Product') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'tailor_products') ? 'active' : '' }}" href="{{ route('tailor_products.index')  }}">{{ __('Product') }}</a>
                             </li>
                         @endcan
                         @can('Manage Production Stage')
@@ -62,9 +62,9 @@
                 </li>
             @endif
 
-            @if(Gate::check('Manage Tailoring Tools') || Gate::check('Manage Production Stage') || Gate::check('Manage Measurement Field'))
+            @if(Gate::check('Manage Measurement Field'))
                 <li class="collapsed">
-                    <a class="m-link nav-link {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-measurements" href="#">
+                    <a class="m-link nav-link {{ (Request::segment(1) == 'measurement_fields') ? 'active' : '' }}" data-bs-toggle="collapse" data-bs-target="#menu-measurements" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" fill="currentColor" viewBox="0 0 16 16">
                             <path d="M5.5 2A3.5 3.5 0 0 0 2 5.5v5A3.5 3.5 0 0 0 5.5 14h5a3.5 3.5 0 0 0 3.5-3.5V8a.5.5 0 0 1 1 0v2.5a4.5 4.5 0 0 1-4.5 4.5h-5A4.5 4.5 0 0 1 1 10.5v-5A4.5 4.5 0 0 1 5.5 1H8a.5.5 0 0 1 0 1H5.5z"></path>
                             <path class="fill-secondary" d="M16 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"></path>
@@ -74,27 +74,12 @@
                     </a>
 
                     <!-- Menu: Sub menu ul -->
-                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'measurements' || Request::segment(1) == 'measurements_field') ? 'show' : '' }}" id="menu-measurements">
+                    <ul class="sub-menu collapse {{ (Request::segment(1) == 'measurement_fields') ? 'show' : '' }}" id="menu-measurements">
                         @can('Manage Measurement Field')
                             <li>
-                                <a class="ms-link {{ (Request::segment(1) == 'measurements_field') ? 'active' : '' }}" href="auth-404.html">{{ __('Measurement Field') }}</a>
+                                <a class="ms-link {{ (Request::segment(1) == 'measurement_fields') ? 'active' : '' }}" href="{{ route('measurement_fields.index')  }}">{{ __('Measurement Field') }}</a>
                             </li>
                         @endcan
-                        <li>
-                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Production Stages') }}</a>
-                        </li>
-                        <li>
-                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Sizes') }}</a>
-                        </li>
-                        <li>
-                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Tailoring Category') }}</a>
-                        </li>
-                        <li>
-                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Tailoring Collection') }}</a>
-                        </li>
-                        <li>
-                            <a class="ms-link {{ (Request::segment(1) == 'production_stage') ? 'active' : '' }}" href="auth-404.html">{{ __('Production Capacity') }}</a>
-                        </li>
                     </ul>
                 </li>
             @endif

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductionStageController;
 use App\Http\Controllers\FabricSizeController;
 use App\Http\Controllers\TailorCategoryController;
 use App\Http\Controllers\TailorProductController;
+use App\Http\Controllers\MeasurementFieldController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +67,15 @@ Route::get('get-tailor-category', [TailorCategoryController::class, 'datatables'
 
 // Tailor Product Area
 Route::resource('tailor_products',TailorProductController::class)->middleware('auth');
-Route::get('get-tailor-product', [TailorProductController::::class, 'datatables'])
+Route::get('get-tailor-product', [TailorProductController::class, 'datatables'])
         ->middleware('auth')
         ->name('tailor.product.datatables');
+
+// Measurement Field Area
+Route::resource('measurement_fields', MeasurementFieldController::class)->middleware('auth');
+Route::get('get-measurement-field', [MeasurementFieldController::class, 'datatables'])
+        ->middleware('auth')
+        ->name('measurement.field.datatables');
+Route::patch('post-measurement-field-option/{id}', [MeasurementFieldController::class, 'updateOption'])
+        ->middleware('auth')
+        ->name('measurement.field.option');
